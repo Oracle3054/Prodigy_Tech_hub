@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Courses — Prodigy Tech Hub</title>
+  <meta name="description" content="Prodigy Tech Hub — courses across Web, Mobile, Data, AI, Cloud, Cybersecurity & more." />
+  <style>
+    /* --------------------------
+       Prodigy — Courses Page
+       Clean, mature, subtle animations
+    ---------------------------*/
+    :root{
+      --bg:#f7fafc;
+      --card:#ffffff;
+      --primary:#2563eb;
+      --accent:#60a5fa;
+      --muted:#6b7280;
+      --text:#0f172a;
+      --radius:12px;
+      --maxw:1200px;
+      --glass:rgba(255,255,255,0.65);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+      background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;
+      line-height:1.5;
+    }
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+
+    /* ---------- Header ---------- */
+    .site-header{
+      position:sticky;top:0;z-index:1200;
+      backdrop-filter: blur(6px);
+      background:linear-gradient(180deg, rgba(255,255,255,0.78), rgba(255,255,255,0.72));
+      border-bottom:1px solid rgba(15,23,36,0.04);
+      box-shadow:0 6px 30px rgba(2,6,23,0.03);
+    }
+    .nav-inner{
+      max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;gap:1rem;padding:.75rem 1rem;
+    }
+    .brand{display:flex;align-items:center;gap:.75rem}
+    .logo-img{width:46px;height:46px;border-radius:10px;object-fit:cover;box-shadow:0 8px 26px rgba(37,99,235,0.06)}
+    .brand .title{font-weight:800}
+    .brand .tag{font-size:.82rem;color:var(--muted)}
+
+    .primary-nav{margin-left:auto;display:flex;gap:.5rem;align-items:center}
+    .primary-nav a{padding:.45rem .75rem;border-radius:8px;color:var(--text);font-weight:700;opacity:.95;transition:all .18s}
+    .primary-nav a:hover{background:rgba(37,99,235,0.06);color:var(--primary)}
+    .primary-nav a.active{background:var(--primary);color:#fff;box-shadow:0 8px 30px rgba(37,99,235,0.12)}
+
+    .hamburger{display:none;margin-left:8px;padding:.45rem;border-radius:8px;background:transparent;border:none;cursor:pointer}
+    .hamburger span{display:block;width:20px;height:2px;margin:4px 0;background:var(--text);transition:all .25s}
+
+    /* mobile nav */
+    .mobile-nav{display:none}
+    .mobile-nav.active{display:block;background:var(--card);border-top:1px solid rgba(15,23,36,0.04)}
+    .mobile-nav a{display:block;padding:.9rem 1rem;border-bottom:1px solid rgba(15,23,36,0.03)}
+
+    @media (max-width:720px){
+      .primary-nav{display:none}
+      .hamburger{display:block}
+    }
+
+    /* ---------- Hero ---------- */
+    .hero{
+      max-width:var(--maxw);margin:1.6rem auto;padding:2.2rem 1rem;display:flex;gap:1.5rem;align-items:center;
+    }
+    .hero-left{flex:1;min-width:220px}
+    .eyebrow{display:inline-block;background:rgba(37,99,235,0.08);color:var(--primary);padding:.35rem .6rem;border-radius:999px;font-weight:800;font-size:.82rem}
+    .hero-title{font-size:2rem;margin:.6rem 0;line-height:1.06}
+    .hero-lead{color:var(--muted);max-width:70%}
+
+    .cta-row{display:flex;gap:.75rem;margin-top:1rem}
+    .btn{display:inline-flex;align-items:center;gap:.45rem;padding:.6rem 1rem;border-radius:10px;font-weight:800;cursor:pointer;transition:transform .22s,box-shadow .22s}
+    .btn-primary{background:var(--primary);color:#fff;box-shadow:0 10px 30px rgba(37,99,235,0.12)}
+    .btn-ghost{background:transparent;border:1.2px solid rgba(15,23,36,0.06);color:var(--text)}
+    .btn:hover{transform:translateY(-3px)}
+
+    .hero-media{width:420px;flex:0 0 420px}
+    .hero-card{background:var(--card);border-radius:14px;overflow:hidden;box-shadow:0 18px 48px rgba(2,6,23,0.06)}
+    .hero-card img{width:100%;height:260px;object-fit:cover}
+    .hero-meta{padding:1rem;display:flex;align-items:center;justify-content:space-between}
+
+    @media (max-width:1000px){ .hero{flex-direction:column-reverse} .hero-media{width:100%} .hero-lead{max-width:100%} }
+
+    /* ---------- Controls (search + filters) ---------- */
+    .controls{max-width:var(--maxw);margin:1.25rem auto;padding:0 1rem;display:flex;gap:1rem;align-items:center;justify-content:space-between;flex-wrap:wrap}
+    .search-wrap{flex:1;min-width:240px}
+    .search{display:flex;align-items:center;gap:.6rem;background:var(--card);padding:.5rem;border-radius:999px;box-shadow:0 8px 24px rgba(2,6,23,0.04)}
+    .search input{border:none;outline:none;padding:.6rem .5rem;font-size:1rem;background:transparent}
+    .filters{display:flex;gap:.6rem;flex-wrap:wrap}
+    .filters button{padding:.55rem .95rem;border-radius:10px;border:1px solid rgba(15,23,36,0.06);background:transparent;font-weight:800;cursor:pointer;transition:all .22s}
+    .filters button.active{background:linear-gradient(90deg,var(--primary),#3b82f6);color:#fff;box-shadow:0 10px 30px rgba(37,99,235,0.14);transform:translateY(-3px)}
+
+    /* ---------- Category strip (quick) ---------- */
+    .category-strip{display:flex;gap:.5rem;flex-wrap:wrap;margin:1rem auto;max-width:var(--maxw);padding:0 1rem;justify-content:center}
+    .cat-pill{padding:.45rem .8rem;border-radius:999px;background:rgba(15,23,36,0.04);font-weight:800;color:var(--text);cursor:pointer;transition:all .18s}
+    .cat-pill:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(2,6,23,0.04)}
+
+    /* ---------- Courses Grid ---------- */
+    .courses-wrap{max-width:var(--maxw);margin:0 auto;padding:1rem}
+    .courses-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}
+    .course-card{
+      background:var(--card);border-radius:12px;overflow:hidden;box-shadow:0 8px 30px rgba(2,6,23,0.04);
+      transition:transform .35s,box-shadow .35s;transform:translateY(8px);opacity:0;
+      will-change:transform,opacity;
+    }
+    .course-card.visible{transform:none;opacity:1}
+    .course-card:hover{transform:translateY(-10px) scale(1.01);box-shadow:0 20px 50px rgba(2,6,23,0.08)}
+    .card-media{height:160px;overflow:hidden}
+    .card-media img{width:100%;height:100%;object-fit:cover;display:block}
+    .card-body{padding:1rem}
+    .tag{display:inline-block;background:var(--accent);color:#fff;padding:.28rem .6rem;border-radius:6px;font-weight:800;font-size:.78rem;margin-bottom:.5rem}
+    .card-title{font-size:1.03rem;margin:.3rem 0;font-weight:800}
+    .card-desc{color:var(--muted);font-size:.95rem;margin-bottom:.8rem}
+    .card-actions{display:flex;gap:.6rem;align-items:center}
+
+    .btn-light{background:transparent;border:1px solid rgba(15,23,36,0.06);padding:.48rem .8rem;border-radius:8px;font-weight:800;cursor:pointer}
+
+    /* responsive columns */
+    @media (max-width:1100px){ .courses-grid{grid-template-columns:repeat(3,1fr)} }
+    @media (max-width:820px){ .courses-grid{grid-template-columns:repeat(2,1fr)}; .hero-lead{max-width:100%} }
+    @media (max-width:520px){ .courses-grid{grid-template-columns:1fr} }
+
+    /* CTA + Footer */
+    .cta{max-width:var(--maxw);margin:2rem auto;padding:1.6rem;border-radius:12px;background:linear-gradient(90deg,#fff,#f7fbff);display:flex;justify-content:space-between;align-items:center;gap:1rem;box-shadow:0 10px 30px rgba(2,6,23,0.03)}
+    .footer{margin-top:2.2rem;padding:2.2rem 1rem;background:#fff;border-top:1px solid rgba(15,23,36,0.04)}
+    .footer-inner{max-width:var(--maxw);margin:0 auto;display:flex;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+    .muted{color:var(--muted)}
+
+    /* Modal */
+    .modal{position:fixed;inset:0;background:rgba(2,6,23,0.6);display:none;align-items:center;justify-content:center;z-index:1400;padding:1rem}
+    .modal.active{display:flex}
+    .modal-content{width:100%;max-width:880px;background:#fff;border-radius:12px;padding:1rem;box-shadow:0 30px 80px rgba(2,6,23,0.25);animation:pop .26s ease}
+    @keyframes pop{from{transform:translateY(6px) scale(.98);opacity:0}to{transform:none;opacity:1}}
+
+    .modal .close{position:absolute;right:18px;top:16px;background:#fff;border:1px solid rgba(15,23,36,0.06);border-radius:999px;width:40px;height:40px;cursor:pointer;font-weight:800}
+    .modal video{width:100%;border-radius:8px;background:#000}
+
+    /* subtle utility */
+    .visually-hidden{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap;}
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header" role="banner">
+    <div class="nav-inner">
+      <a class="brand" href="index.html" aria-label="Prodigy Tech Hub Home">
+        <img class="logo-img" src="Resources/assets/icon_logo/prodigytechhub-web-logo.webp" alt="Prodigy logo">
+        <div>
+          <div class="title">Prodigy Tech Hub</div>
+          <div class="tag">Learn • Build • Launch</div>
+        </div>
+      </a>
+
+      <nav class="primary-nav" role="navigation" aria-label="Main navigation">
+        <a href="about.html">About</a>
+        <a href="training.html">Training</a>
+        <a href="admission.html">Admission</a>
+        <a href="portal.html">Portal</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Mobile nav -->
+    <div id="mobileNav" class="mobile-nav" aria-hidden="true">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="training.html">Training</a>
+      <a href="courses.html">Courses</a>
+      <a href="admission.html">Admission</a>
+      <a href="portal.html">Portal</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-left">
+        <div class="eyebrow">Admissions Open</div>
+        <h1 id="hero-heading" class="hero-title">Discover Your Path in Tech</h1>
+        <p class="hero-lead">From fundamentals to advanced mastery — learn, build, and lead. Choose a track and get hands-on projects, mentorship and hiring support.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#courses">Browse Courses</a>
+          <a class="btn btn-ghost" href="admission.html">Apply Now</a>
+        </div>
+      </div>
+
+      <div class="hero-media" aria-hidden="true">
+        <div class="hero-card">
+          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1600&auto=format&fit=crop" alt="Students collaborating">
+          <div class="hero-meta">
+            <div>
+              <div style="font-weight:800">Featured track</div>
+              <div class="muted" style="font-size:.92rem">Full-Stack Web Development</div>
+            </div>
+            <div style="text-align:right"><small class="muted">1200+ students</small></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Controls -->
+    <div class="controls" role="region" aria-label="Course controls">
+      <div class="search-wrap">
+        <div class="search" role="search">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="color:var(--primary)"><path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></circle></svg>
+          <input id="searchInput" type="search" placeholder="Search courses, topics or skills" aria-label="Search courses">
+        </div>
+      </div>
+
+      <div class="filters" role="toolbar" aria-label="Filter courses">
+        <button class="active" data-filter="all">Show All</button>
+        <button data-filter="basic">Beginner</button>
+        <button data-filter="intermediate">Intermediate</button>
+        <button data-filter="advanced">Advanced</button>
+      </div>
+    </div>
+
+    <!-- Category quick -->
+    <div class="category-strip" aria-hidden="true">
+      <div class="cat-pill" data-cat="web">Web</div>
+      <div class="cat-pill" data-cat="mobile">Mobile</div>
+      <div class="cat-pill" data-cat="data">Data</div>
+      <div class="cat-pill" data-cat="ai">AI</div>
+      <div class="cat-pill" data-cat="cyber">Cyber</div>
+      <div class="cat-pill" data-cat="cloud">Cloud</div>
+      <div class="cat-pill" data-cat="design">UI/UX</div>
+    </div>
+
+    <!-- Courses -->
+    <section id="courses" class="courses-wrap" aria-label="Courses">
+      <div class="courses-grid" id="coursesGrid">
+        <!-- sample course cards — add more as needed -->
+        <article class="course-card" data-category="web basic" data-title="Intro to HTML & CSS" data-video="Resources/Videos/htmlcss.mp4" tabindex="0">
+          <div class="card-media"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80" alt=""></div>
+          <div class="card-body">
+            <div class="tag">Beginner</div>
+            <div class="card-title">Intro to HTML & CSS</div>
+            <div class="card-desc">Foundations of markup, styling and responsive layout.</div>
+            <div class="card-actions">
+              <button class="btn-light preview-btn">Preview</button>
+              <a class="btn" href="courses/web-development.html#html-css">View Course</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="course-card" data-category="web intermediate" data-title="JavaScript Essentials" data-video="Resources/Videos/js.mp4">
+          <div class="card-media"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80" alt=""></div>
+          <div class="card-body">
+            <div class="tag">Intermediate</div>
+            <div class="card-title">JavaScript Essentials</div>
+            <div class="card-desc">Core JS concepts, DOM, async and modern patterns.</div>
+            <div class="card-actions">
+              <button class="btn-light preview-btn">Preview</button>
+              <a class="btn" href="courses/web-development.html#javascript">View Course</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="course-card" data-category="web advanced" data-title="Full-Stack with React & Node" data-video="Resources/Videos/fullstack.mp4">
+          <div class="card-media"><img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80" alt=""></div>
+          <div class="card-body">
+            <div class="tag">Advanced</div>
+            <div class="card-title">Full-Stack with React & Node</div>
+            <div class="card-desc">Build production apps, auth, server APIs and deployment.</div>
+            <div class="card-actions">
+              <button class="btn-light preview-btn">Preview</button>
+              <a class="btn" href="courses/web-development.html#fullstack">View Course</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="course-card" data-category="mobile basic" data-title="Mobile Fundamentals" data-video="Resources/Videos/mobile-basic.mp4">
+          <div class="card-media"><img src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80" alt=""></div>
+          <div class="card-body">
+            <div class="tag">Beginner</div>
+            <div class="card-title">Mobile Fundamentals</div>
+            <div class="card-desc">Intro to mobile UI, platform differences and UX patterns.</div>
+            <div class="card-actions">
+              <button class="btn-light preview-btn">Preview</button>
+              <a class="btn" href="courses/mobile-development.html#fundamentals">View Course</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="course-card" data-category="data intermediate" data-title="Data Analysis with Python" data-video="Resources/Videos/data-python.mp4">
+          <div class="card-media"><img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80" alt=""></div>
+          <div class="card-body">
+            <div class="tag">Intermediate</div>
+            <div class="card-title">Data Analysis with Python</div>
+            <div class="card-desc">Pandas, cleaning and visualization for insight.</div>
+            <div class="card-actions">
+              <button class="btn-light preview-btn">Preview</button>
+              <a class="btn" href="courses/data-science.html#analysis">View Course</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="course-card" data-category="ai advanced" data-title="Machine Learning & AI" data-video="Resources/Videos/ai.mp4">
+          <div class="card-media"><img src="https://images.unsplash.com/photo-1581090700227-1e37b190418e?q=80" alt=""></div>
+          <div class="card-body">
+            <div class="tag">Advanced</div>
+            <div class="card-title">Machine Learning & AI</div>
+            <div class="card-desc">Neural nets, model training, deployment & ethics.</div>
+            <div class="card-actions">
+              <button class="btn-light preview-btn">Preview</button>
+              <a class="btn" href="courses/data-science.html#ml">View Course</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="course-card" data-category="cyber intermediate" data-title="Ethical Hacking Essentials" data-video="Resources/Videos/cyber.mp4">
+          <div class="card-media"><img src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80" alt=""></div>
+          <div class="card-body">
+            <div class="tag">Intermediate</div>
+            <div class="card-title">Ethical Hacking Essentials</div>
+            <div class="card-desc">Pentesting basics, reporting and defense.</div>
+            <div class="card-actions">
+              <button class="btn-light preview-btn">Preview</button>
+              <a class="btn" href="courses/cybersecurity.html#ethic">View Course</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="course-card" data-category="cloud intermediate" data-title="Intro to Cloud (AWS)" data-video="Resources/Videos/aws.mp4">
+          <div class="card-media"><img src="https://images.unsplash.com/photo-1508830524289-0adcbe822b40?q=80" alt=""></div>
+          <div class="card-body">
+            <div class="tag">Intermediate</div>
+            <div class="card-title">Intro to Cloud (AWS)</div>
+            <div class="card-desc">Core cloud services, deployment and best practices.</div>
+            <div class="card-actions">
+              <button class="btn-light preview-btn">Preview</button>
+              <a class="btn" href="courses/cloud-computing.html#aws">View Course</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="course-card" data-category="design basic" data-title="UI Design with Figma" data-video="Resources/Videos/figma.mp4">
+          <div class="card-media"><img src="https://images.unsplash.com/photo-1520880867055-1e30d1cb001c?q=80" alt=""></div>
+          <div class="card-body">
+            <div class="tag">Beginner</div>
+            <div class="card-title">UI Design with Figma</div>
+            <div class="card-desc">Design systems, prototyping and collaboration.</div>
+            <div class="card-actions">
+              <button class="btn-light preview-btn">Preview</button>
+              <a class="btn" href="courses/ui-ux-design.html#figma">View Course</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="course-card" data-category="business basic" data-title="Startup & Product Fundamentals" data-video="Resources/Videos/product.mp4">
+          <div class="card-media"><img src="https://images.unsplash.com/photo-1498075702571-ecb018f3752d?q=80" alt=""></div>
+          <div class="card-body">
+            <div class="tag">Beginner</div>
+            <div class="card-title">Startup & Product Fundamentals</div>
+            <div class="card-desc">MVPs, customer discovery and product strategy.</div>
+            <div class="card-actions">
+              <button class="btn-light preview-btn">Preview</button>
+              <a class="btn" href="courses/tech-business.html#startup">View Course</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta" aria-labelledby="cta-title">
+      <div class="left">
+        <h3 id="cta-title">Join the next cohort</h3>
+        <p class="muted">Limited seats per cohort. Apply now to secure mentorship, projects and hiring support.</p>
+      </div>
+      <div>
+        <a class="btn btn-primary" href="admission.html">Enroll Now</a>
+        <a class="btn" href="portal.html" style="background:transparent;border:1px solid rgba(15,23,36,0.06);margin-left:.6rem">Student Portal</a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+      <div class="footer-inner">
+        <div>
+          <a href="index.html" style="display:flex;gap:.6rem;align-items:center">
+            <img src="Resources/assets/icon_logo/80b8cd18c4762f3092df8ba1ed64a4ad.jpg" alt="logo" style="width:44px;border-radius:8px">
+            <div>
+              <div style="font-weight:800">Prodigy Tech Hub</div>
+              <div class="muted" style="font-size:.85rem">Learn • Build • Launch</div>
+            </div>
+          </a>
+          <div class="muted" style="margin-top:.8rem">© 2025 Prodigy Tech Hub • Built with care</div>
+        </div>
+
+        <div class="muted" style="display:flex;flex-direction:column;gap:.6rem">
+          <div><strong>Quick links</strong></div>
+          <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="courses.html">Courses</a>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html">Contact</a>
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:.6rem;align-items:flex-end">
+          <div><strong>Follow</strong></div>
+          <div class="socials">
+            <a href="#" aria-label="YouTube">YouTube</a>
+            <a href="#" aria-label="LinkedIn">LinkedIn</a>
+            <a href="#" aria-label="X">X</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- Modal (preview) -->
+  <div id="previewModal" class="modal" aria-hidden="true">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-label="Course preview">
+      <button class="close" id="closePreview" aria-label="Close preview">&times;</button>
+      <div id="modalMeta" style="margin-bottom:.5rem">
+        <div style="font-weight:800" id="modalTitle">Course Title</div>
+        <div class="muted" id="modalLevel">Level</div>
+      </div>
+      <video id="modalVideo" controls playsinline></video>
+      <div style="margin-top:.7rem;display:flex;gap:.6rem;justify-content:flex-end">
+        <a id="modalCourseLink" class="btn btn-primary" href="#">Go to course page</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    // helpers
+    const $ = s => document.querySelector(s);
+    const $$ = s => Array.from(document.querySelectorAll(s));
+
+    // mobile nav
+    const hamburger = $('#hamburger');
+    const mobileNav = $('#mobileNav');
+    if(hamburger){
+      hamburger.addEventListener('click', ()=>{
+        mobileNav.classList.toggle('active');
+        const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+        hamburger.setAttribute('aria-expanded', String(!expanded));
+      });
+    }
+
+    // Elements
+    const searchInput = $('#searchInput');
+    const filterBtns = Array.from(document.querySelectorAll('.filters button'));
+    const cards = $$('.course-card');
+    const coursesGrid = $('#coursesGrid');
+    const catPills = $$('.cat-pill');
+
+    // MATCH FUNCTIONS
+    function matchesSearch(card, term){
+      if(!term) return true;
+      const title = (card.dataset.title || '').toLowerCase();
+      const desc = (card.querySelector('.card-desc')?.textContent || '').toLowerCase();
+      return (title + ' ' + desc).includes(term.toLowerCase());
+    }
+    function matchesFilter(card, filter){
+      if(!filter || filter === 'all') return true;
+      const cats = (card.dataset.category||'').split(/\s+/);
+      return cats.includes(filter);
+    }
+
+    // update visibility
+    function updateVisibility({filter='all', search='' } = {}){
+      let visible = 0;
+      cards.forEach((card, i) => {
+        const ok = matchesFilter(card, filter) && matchesSearch(card, search);
+        if(ok){
+          card.style.display = 'block';
+          // stagger appearance
+          setTimeout(()=>card.classList.add('visible'), 50 + (i%6)*55);
+          visible++;
+        } else {
+          card.classList.remove('visible');
+          setTimeout(()=>card.style.display = 'none', 240);
+        }
+      });
+      return visible;
+    }
+
+    // initialize filters
+    filterBtns.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        filterBtns.forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.filter;
+        updateVisibility({filter: f, search: searchInput.value.trim()});
+      });
+    });
+
+    // live search
+    searchInput.addEventListener('input', (e)=>{
+      const term = e.target.value.trim();
+      const active = filterBtns.find(b=>b.classList.contains('active'));
+      const filter = active ? active.dataset.filter : 'all';
+      updateVisibility({filter, search:term});
+    });
+
+    // category pills: quick search & scroll
+    catPills.forEach(p => {
+      p.addEventListener('click', ()=> {
+        const cat = p.dataset.cat;
+        // set filter to all and run search for category word
+        filterBtns.forEach(b=>b.classList.remove('active'));
+        document.querySelector('.filters button[data-filter="all"]').classList.add('active');
+        updateVisibility({filter:'all', search:cat});
+        coursesGrid.scrollIntoView({behavior:'smooth', block:'start'});
+      });
+    });
+
+    // initial intersection reveal fallback (for browsers that support it)
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, {threshold:0.12});
+    cards.forEach(c => io.observe(c));
+
+    // ensure all hidden initially
+    cards.forEach(c => c.style.display = 'none');
+    updateVisibility({filter:'all', search:''});
+
+    /* --------------- Video preview modal --------------- */
+    const previewModal = $('#previewModal');
+    const modalVideo = $('#modalVideo');
+    const modalTitle = $('#modalTitle');
+    const modalLevel = $('#modalLevel');
+    const modalLink = $('#modalCourseLink');
+    const closePreview = $('#closePreview');
+
+    function openPreview(card){
+      const src = card.dataset.video || '';
+      const title = card.dataset.title || card.querySelector('.card-title')?.textContent || 'Preview';
+      const level = card.querySelector('.tag')?.textContent || '';
+      const link = card.querySelector('a.btn')?.href || '#';
+
+      modalVideo.src = src;
+      modalTitle.textContent = title;
+      modalLevel.textContent = level;
+      modalLink.href = link;
+
+      previewModal.classList.add('active');
+      previewModal.setAttribute('aria-hidden','false');
+      modalVideo.play().catch(()=>{/* autoplay may be blocked; user can press play */});
+    }
+    function closePreviewModal(){
+      previewModal.classList.remove('active');
+      previewModal.setAttribute('aria-hidden','true');
+      modalVideo.pause();
+      modalVideo.src = '';
+    }
+
+    // hook preview buttons
+    $$('.preview-btn').forEach(btn=>{
+      btn.addEventListener('click', e=>{
+        e.preventDefault();
+        const card = btn.closest('.course-card');
+        openPreview(card);
+      });
+    });
+
+    closePreview.addEventListener('click', closePreviewModal);
+    previewModal.addEventListener('click', e => { if(e.target === previewModal) closePreviewModal(); });
+    document.addEventListener('keydown', e => { if(e.key === 'Escape' && previewModal.classList.contains('active')) closePreviewModal(); });
+
+    // Respect reduced motion
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      document.documentElement.style.scrollBehavior = 'auto';
+      $$('.course-card').forEach(c => c.style.transition = 'none');
+    }
+  })();
+  </script>
+</body>
+</html>

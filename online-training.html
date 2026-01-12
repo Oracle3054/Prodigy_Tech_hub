@@ -1,0 +1,701 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Online Training — Prodigy Tech Hub</title>
+<meta name="description" content="Prodigy Tech Hub — Online training: live classes, mentors, projects and career support." />
+<style>
+  :root{
+    --bg:#f7fbff;
+    --surface:#ffffff;
+    --primary:#2563eb;
+    --accent:#60a5fa;
+    --muted:#64748b;
+    --dark:#0f172a;
+    --radius:14px;
+    --glass: rgba(255,255,255,0.7);
+    --card-shadow: 0 10px 30px rgba(15,23,42,0.06);
+    --transition: 280ms cubic-bezier(.2,.9,.3,1);
+  }
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    background: linear-gradient(180deg,var(--bg),#eef6ff 30%);
+    color:var(--dark);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    line-height:1.5;
+  }
+
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+
+  /* ---------- Header ---------- */
+  header.site-header{
+    position:sticky;top:0;z-index:1200;
+    backdrop-filter: blur(6px);
+    background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.7));
+    border-bottom: 1px solid rgba(15,23,36,0.04);
+    box-shadow: 0 6px 20px rgba(2,6,23,0.03);
+  }
+  .nav-inner{
+    max-width:1200px;margin:0 auto;display:flex;align-items:center;padding:.9rem 1rem;gap:1rem;
+  }
+  .brand{
+    display:flex;gap:.7rem;align-items:center;
+  }
+  .brand .logo-img{
+    width:46px;height:46px;border-radius:10px;object-fit:cover;
+    box-shadow: 0 8px 22px rgba(37,99,235,0.06);
+  }
+  .brand .title{font-weight:800;font-size:1rem;color:var(--primary)}
+  nav.primary{margin-left:1.5rem;display:flex;gap:.9rem;align-items:center}
+  nav.primary a{font-weight:600;color:var(--dark);padding:.5rem .4rem;border-radius:8px;transition:color var(--transition)}
+  nav.primary a.active, nav.primary a:hover{color:var(--primary);background:rgba(37,99,235,0.04)}
+
+  .nav-actions{margin-left:auto;display:flex;gap:.6rem;align-items:center}
+  .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.6rem .9rem;border-radius:10px;font-weight:700;border:none;cursor:pointer}
+  .btn-primary{background:var(--primary);color:#fff;box-shadow:0 10px 30px rgba(37,99,235,0.12);transition:transform var(--transition)}
+  .btn-primary:hover{transform:translateY(-3px)}
+  .btn-ghost{background:transparent;border:1px solid rgba(15,23,36,0.06);color:var(--dark)}
+
+  .hamburger{display:none;background:transparent;border:none;padding:.5rem;border-radius:8px}
+  .hamburger span{display:block;height:2px;width:18px;background:var(--dark);margin:3px 0;transition:all .2s}
+
+  @media (max-width:900px){
+    nav.primary{display:none}
+    .hamburger{display:block}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:62vh;
+    display:grid;place-items:center;
+    padding:2.5rem 1rem;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-bg {
+    position:absolute;inset:0;z-index:0;
+    background:linear-gradient(120deg, rgba(37,99,235,0.85), rgba(96,165,250,0.85));
+    display:flex;align-items:center;justify-content:center;mix-blend-mode:multiply;
+    transform-origin:center;
+    animation:slowFloat 14s ease-in-out infinite;
+  }
+  .hero .wrap{position:relative;z-index:2;max-width:1100px;margin:0 auto;color:#fff;padding:3rem 1rem;border-radius:18px}
+  .eyebrow{display:inline-block;background:rgba(255,255,255,0.12);padding:.35rem .65rem;border-radius:999px;font-weight:700;margin-bottom:1rem}
+  .hero h1{font-size:2.2rem;line-height:1.05;margin-bottom:.6rem}
+  .hero p{opacity:.95;color:rgba(255,255,255,0.92);margin-bottom:1.2rem}
+
+  .hero-ctas{display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center}
+  @keyframes slowFloat{0%{transform:scale(1) translateY(-4px)}50%{transform:scale(1.02) translateY(4px)}100%{transform:scale(1) translateY(-4px)}}
+
+  /* ---------- CONTENT LAYOUT ---------- */
+  main{max-width:1200px;margin:2.2rem auto;padding:0 1rem 4rem}
+
+  section.heading {margin-bottom:1rem}
+  h2.section-title{font-size:1.5rem;margin-bottom:.6rem;color:var(--dark);font-weight:800}
+  p.lead{color:var(--muted);margin-bottom:1rem}
+
+  /* ---------- SEARCH & FILTERS ---------- */
+  .controls{display:flex;gap:1rem;align-items:center;margin:.6rem 0 1.25rem;flex-wrap:wrap}
+  .search {
+    flex:1;max-width:560px;display:flex;gap:.6rem;background:var(--surface);padding:.5rem;border-radius:12px;box-shadow:var(--card-shadow);
+    align-items:center;border:1px solid rgba(15,23,36,0.03);
+  }
+  .search input{border:0;outline:none;padding:.6rem .4rem;font-size:1rem;background:transparent}
+  .filters{display:flex;gap:.5rem;flex-wrap:wrap}
+  .filters button{background:transparent;padding:.55rem .8rem;border-radius:9px;border:1px solid rgba(15,23,36,0.06);font-weight:700;cursor:pointer;transition:all var(--transition)}
+  .filters button.active{background:var(--primary);color:#fff;box-shadow:0 10px 25px rgba(37,99,235,0.12);transform:translateY(-3px)}
+
+  /* ---------- COURSES GRID ---------- */
+  .courses-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem;
+  }
+  .course-card{
+    background:var(--surface);border-radius:12px;padding:0;overflow:hidden;box-shadow:var(--card-shadow);transition:transform var(--transition),box-shadow var(--transition);
+  }
+  .course-card:hover{transform:translateY(-6px);box-shadow:0 20px 45px rgba(15,23,42,0.10)}
+  .course-media{height:150px;overflow:hidden}
+  .course-media img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+  .course-card:hover .course-media img{transform:scale(1.06)}
+  .course-body{padding:1rem}
+  .course-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem}
+  .level{background:linear-gradient(90deg,var(--accent),var(--primary));color:#fff;padding:.25rem .55rem;border-radius:999px;font-weight:700;font-size:.8rem}
+  .course-title{font-weight:800;margin-bottom:.45rem}
+  .course-desc{color:var(--muted);font-size:.95rem;margin-bottom:.9rem}
+  .course-actions{display:flex;gap:.6rem;align-items:center}
+  .btn-outline{border:1px solid rgba(15,23,42,0.06);background:transparent;padding:.55rem .75rem;border-radius:9px;font-weight:700;cursor:pointer}
+  .tag{font-size:.8rem;color:var(--muted)}
+
+  /* ---------- MODAL (VIDEO PREVIEW / MENTOR PROFILE / APPLY CONFIRM) ---------- */
+  .modal{
+    position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,0.6);z-index:1400;padding:1rem;
+  }
+  .modal.active{display:flex}
+  .modal-card{background:var(--surface);border-radius:12px;box-shadow:0 30px 80px rgba(2,6,23,0.4);max-width:920px;width:100%;overflow:hidden}
+  .modal-body{padding:1rem}
+  .modal-close{position:absolute;right:14px;top:14px;background:#fff;border-radius:8px;border:0;padding:.35rem .55rem;cursor:pointer}
+
+  /* ---------- MENTORS ---------- */
+  .mentors-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-top:1rem}
+  .mentor-card{background:var(--surface);padding:1rem;border-radius:12px;box-shadow:var(--card-shadow);text-align:center;transition:transform var(--transition)}
+  .mentor-card:hover{transform:translateY(-6px)}
+  .mentor-photo{width:84px;height:84px;border-radius:12px;margin:0 auto;overflow:hidden}
+  .mentor-photo img{width:100%;height:100%;object-fit:cover}
+  .mentor-name{font-weight:800;margin-top:.6rem}
+  .mentor-role{color:var(--muted);font-size:.9rem}
+
+  /* ---------- HOW IT WORKS TIMELINE ---------- */
+  .timeline{display:flex;flex-direction:column;gap:.8rem}
+  .step{display:flex;gap:1rem;align-items:flex-start;background:var(--surface);padding:1rem;border-radius:12px;box-shadow:var(--card-shadow)}
+  .step .num{width:44px;height:44px;border-radius:10px;background:linear-gradient(90deg,var(--primary),var(--accent));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900}
+  .step h4{margin:0 0 .2rem}
+
+  /* ---------- STUDENT EXPERIENCE (SIMPLE CAROUSEL) ---------- */
+  .slider{position:relative;overflow:hidden;border-radius:12px;background:linear-gradient(180deg,#fff,#f7fbff);box-shadow:var(--card-shadow);padding:1rem}
+  .slides{display:flex;transition:transform .6s cubic-bezier(.2,.9,.3,1);gap:1rem}
+  .slide{min-width:100%;padding:1rem}
+  .slide blockquote{font-style:italic;color:var(--dark);margin:0;padding:0;font-size:1rem}
+  .slider-controls{display:flex;gap:.5rem;justify-content:center;margin-top:.8rem}
+
+  /* ---------- UPCOMING COHORTS LIST ---------- */
+  .cohort-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1rem}
+  .cohort-item{background:var(--surface);padding:1rem;border-radius:12px;box-shadow:var(--card-shadow)}
+  .cohort-item strong{display:block;margin-bottom:.4rem;color:var(--primary)}
+
+  /* ---------- CTA ---------- */
+  .final-cta{display:flex;flex-direction:column;gap:.6rem;align-items:center;padding:2rem;background:linear-gradient(90deg,var(--primary),var(--accent));color:#fff;border-radius:12px;margin-top:1.5rem}
+  .final-cta h3{margin:0;font-size:1.25rem}
+  .final-cta .cta-row{display:flex;gap:.8rem;margin-top:.6rem}
+
+  /* ---------- Footer ---------- */
+  footer{margin-top:2rem;padding:2rem 1rem;background:#08142a;color:#cfe6ff;text-align:center;border-top:1px solid rgba(255,255,255,0.03)}
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:900px){
+    .nav-inner{padding:.6rem 0.8rem}
+    .hero .wrap{padding:2rem}
+    .hero h1{font-size:1.6rem}
+  }
+
+  @media (max-width:640px){
+    .hero{min-height:auto;padding:2.2rem 1rem}
+    main{margin-top:1rem}
+  }
+</style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header" role="banner">
+    <div class="nav-inner">
+      <a class="brand" href="index.html" aria-label="Prodigy Home">
+        <img class="logo-img" src="Resources/assets/icon_logo/80b8cd18c4762f3092df8ba1ed64a4ad.jpg" alt="Prodigy logo">
+        <div style="display:flex;flex-direction:column;line-height:1">
+          <span class="title">Prodigy Tech Hub</span>
+          <small style="color:var(--muted);font-weight:700">Learn • Build • Launch</small>
+        </div>
+      </a>
+
+      <nav class="primary" aria-label="Primary navigation">
+        <a href="about.html">About</a>
+        <a href="training.html">Training</a>
+        <a href="online-training.html" class="active">Online Training</a>
+        <a href="courses.html">Courses</a>
+        <a href="admission.html">Admission</a>
+        <a href="portal.html">Portal</a>
+        <a href="blog.html">Blog</a>
+      </nav>
+
+      <div class="nav-actions" role="navigation">
+        <button class="btn btn-ghost" onclick="location.href='admission.html'">Enroll</button>
+        <button class="btn btn-primary" id="portalBtn" onclick="location.href='portal.html'">Student Portal</button>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" role="region" aria-label="Hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="wrap">
+      <span class="eyebrow">Online</span>
+      <h1>Empower Your Future — Learn Anywhere, Anytime</h1>
+      <p class="lead">Interactive online programmes designed to help you master tech from the comfort of your home — live classes, projects, mentoring and career support.</p>
+
+      <div class="hero-ctas" role="region">
+        <button class="btn btn-primary" onclick="document.getElementById('programmes').scrollIntoView({behavior:'smooth'})">Explore Programmes</button>
+        <button class="btn btn-ghost" onclick="location.href='admission.html'">Join a Cohort</button>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <!-- SEARCH & FILTER -->
+    <section id="programmes" class="heading" aria-labelledby="progTitle">
+      <h2 id="progTitle" class="section-title">Available Online Programmes</h2>
+      <p class="lead">Filter by level, search by keyword, and preview a course before you enroll.</p>
+
+      <div class="controls">
+        <div class="search" role="search" aria-label="Search courses">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="opacity:.9"><path d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z" stroke="#2563eb" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <input id="searchInput" placeholder="Search courses — e.g. React, Python, UX..." aria-label="Search courses">
+        </div>
+
+        <div class="filters" role="tablist" aria-label="Filter courses">
+          <button class="filter-btn active" data-filter="all" role="tab">Show All</button>
+          <button class="filter-btn" data-filter="beginner" role="tab">Beginner</button>
+          <button class="filter-btn" data-filter="intermediate" role="tab">Intermediate</button>
+          <button class="filter-btn" data-filter="advanced" role="tab">Advanced</button>
+        </div>
+      </div>
+
+      <!-- Courses -->
+      <div class="courses-grid" id="coursesGrid" aria-live="polite">
+        <!-- cards populated by JS -->
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section aria-labelledby="howTitle">
+      <h2 id="howTitle" class="section-title">How it works</h2>
+      <p class="lead">A simple, proven flow — enroll, learn in live sessions, build projects, get certified and connect with employers.</p>
+
+      <div class="timeline" role="list" aria-label="How it works steps">
+        <div class="step" data-animate><div class="num">1</div><div><h4>Enroll</h4><p class="muted">Choose a programme and reserve your seat.</p></div></div>
+        <div class="step" data-animate><div class="num">2</div><div><h4>Join Live Classes</h4><p class="muted">Interactive sessions with mentors and guided labs.</p></div></div>
+        <div class="step" data-animate><div class="num">3</div><div><h4>Build Projects</h4><p class="muted">Real-world assignments that go into your portfolio.</p></div></div>
+        <div class="step" data-animate><div class="num">4</div><div><h4>Get Certified</h4><p class="muted">Receive a Prodigy certificate and hiring support.</p></div></div>
+        <div class="step" data-animate><div class="num">5</div><div><h4>Launch</h4><p class="muted">Interview prep, employer introductions and internships.</p></div></div>
+      </div>
+    </section>
+
+    <!-- MENTORS -->
+    <section aria-labelledby="mentorTitle">
+      <h2 id="mentorTitle" class="section-title">Learn from the Best</h2>
+      <p class="lead">Our mentors are industry practitioners — they teach what they do.</p>
+
+      <div class="mentors-grid" id="mentorsGrid" aria-live="polite">
+        <!-- populated by JS -->
+      </div>
+    </section>
+
+    <!-- STUDENT EXPERIENCE -->
+    <section aria-labelledby="expTitle">
+      <h2 id="expTitle" class="section-title">Student Experience</h2>
+      <p class="lead">Virtual doesn't mean distant — engaging lessons, community and support.</p>
+
+      <div class="slider" id="experienceSlider" aria-roledescription="carousel">
+        <div class="slides" id="slides">
+          <div class="slide">
+            <blockquote>"Prodigy’s live labs made all the difference — I built a real app in month two."</blockquote>
+            <div style="margin-top:.6rem;color:var(--muted)">— Amaka, Frontend Developer</div>
+          </div>
+          <div class="slide">
+            <blockquote>"Mentorship and weekly reviews accelerated my learning curve."</blockquote>
+            <div style="margin-top:.6rem;color:var(--muted)">— Kelechi, Data Analyst</div>
+          </div>
+          <div class="slide">
+            <blockquote>"Supportive community + practical projects = hired within months."</blockquote>
+            <div style="margin-top:.6rem;color:var(--muted)">— David, ML Engineer</div>
+          </div>
+        </div>
+        <div class="slider-controls" id="sliderControls"></div>
+      </div>
+    </section>
+
+    <!-- UPCOMING COHORTS -->
+    <section aria-labelledby="cohortTitle">
+      <h2 id="cohortTitle" class="section-title">Upcoming Sessions</h2>
+      <p class="lead">Find the cohort that fits your schedule — spots are limited.</p>
+
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center;justify-content:space-between">
+        <div class="cohort-list" id="cohortList" style="flex:1"></div>
+        <div style="min-width:260px;text-align:center">
+          <div style="background:var(--surface);padding:1rem;border-radius:12px;box-shadow:var(--card-shadow)">
+            <div style="font-weight:800;color:var(--primary)">Next Cohort Starts In</div>
+            <div class="countdown" id="countdownTimer" aria-live="polite" style="margin-top:.6rem;font-size:1.1rem">--d --h --m --s</div>
+            <div style="margin-top:.6rem"><button class="btn btn-primary" id="enrollNow">Enroll Now</button></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY JOIN -->
+    <section aria-labelledby="whyTitle">
+      <h2 id="whyTitle" class="section-title">Why choose Online Training</h2>
+      <p class="lead">Live sessions, flexible schedules, mentorship, and career help — everything you need to launch.</p>
+
+      <div class="why-grid" style="margin-top:1rem">
+        <div class="why-card"><img src="https://cdn-icons-png.flaticon.com/512/1055/1055646.png" width="44" alt=""><h4>Real projects</h4><p class="muted">Work on real briefs that you can show employers.</p></div>
+        <div class="why-card"><img src="https://cdn-icons-png.flaticon.com/512/2333/2333187.png" width="44" alt=""><h4>Mentorship</h4><p class="muted">1-on-1 and group mentorship to keep you progressing.</p></div>
+        <div class="why-card"><img src="https://cdn-icons-png.flaticon.com/512/478/478545.png" width="44" alt=""><h4>Career support</h4><p class="muted">CV help, mock interviews and hiring partner intros.</p></div>
+        <div class="why-card"><img src="https://cdn-icons-png.flaticon.com/512/1239/1239724.png" width="44" alt=""><h4>Community</h4><p class="muted">Join active cohorts, study groups and alumni events.</p></div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section style="margin-top:1.2rem">
+      <div class="final-cta">
+        <h3>Ready to learn from anywhere?</h3>
+        <p class="muted">Join a cohort or explore individual courses — Prodigy supports your growth.</p>
+        <div class="cta-row">
+          <button class="btn btn-primary" onclick="location.href='admission.html'">Join Now</button>
+          <button class="btn btn-ghost" onclick="location.href='courses.html'">View Courses</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div style="max-width:1100px;margin:0 auto">
+      <div style="display:flex;align-items:center;justify-content:center;gap:1rem;margin-bottom:1rem">
+        <img src="Resources/assets/icon_logo/80b8cd18c4762f3092df8ba1ed64a4ad.jpg" alt="logo" style="width:42px;height:42px;border-radius:8px">
+        <div style="text-align:left">
+          <div style="font-weight:800;color:#dfeeff">Prodigy Tech Hub</div>
+          <small style="color:#c7e2ff">Learn • Build • Launch</small>
+        </div>
+      </div>
+
+      <p style="color:#cfe6ff;margin-bottom:.6rem">© 2025 Prodigy Tech Hub — All rights reserved.</p>
+      <div style="display:flex;gap:1rem;justify-content:center;color:#bde0ff">
+        <a href="#" aria-label="Facebook">Facebook</a> · <a href="#" aria-label="YouTube">YouTube</a> · <a href="#" aria-label="LinkedIn">LinkedIn</a> · <a href="#" aria-label="X">X</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODALS -->
+  <div class="modal" id="videoModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card" role="document">
+      <button class="modal-close" id="closeVideo" aria-label="Close video">✕</button>
+      <div class="modal-body" id="videoBody">
+        <!-- Video injected by JS -->
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="mentorModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close" id="closeMentor" aria-label="Close">✕</button>
+      <div class="modal-body" id="mentorBody"></div>
+    </div>
+  </div>
+
+<script>
+/* =========================
+   Data (sample) — replace with API
+   ========================= */
+const COURSES = [
+  { id:'web101', title:'Frontend Web Development', level:'beginner', duration:'8 weeks', desc:'HTML, CSS, responsive layouts and accessibility.', img:'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1200', video:'Resources/Videos/web-preview.mp4' },
+  { id:'js201', title:'JavaScript & Modern Frameworks', level:'intermediate', duration:'10 weeks', desc:'Modern JS, tooling, React fundamentals and state management.', img:'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200', video:'Resources/Videos/js-preview.mp4' },
+  { id:'ds301', title:'Data Science with Python', level:'advanced', duration:'12 weeks', desc:'Pandas, ML basics, model evaluation and deployment.', img:'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1200', video:'Resources/Videos/ds-preview.mp4' },
+  { id:'ux101', title:'UI/UX Design Mastery', level:'intermediate', duration:'6 weeks', desc:'Figma, prototyping, design systems and research.', img:'https://images.unsplash.com/photo-1520880867055-1e30d1cb001c?q=80&w=1200', video:'Resources/Videos/ux-preview.mp4' },
+  { id:'security', title:'Cybersecurity Essentials', level:'advanced', duration:'12 weeks', desc:'Network security, threat analysis and hands-on labs.', img:'https://images.unsplash.com/photo-1581091215367-59ab6b7df1c6?q=80&w=1200', video:'Resources/Videos/security-preview.mp4' },
+  { id:'cloud', title:'Cloud & DevOps', level:'intermediate', duration:'10 weeks', desc:'AWS fundamentals, CI/CD and infrastructure as code.', img:'https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=1200', video:'Resources/Videos/cloud-preview.mp4' }
+];
+
+const MENTORS = [
+  { id:'m1', name:'Jane Doe', role:'Senior Web Engineer', bio:'10+ years building scalable web platforms. Mentor in frontend systems and architecture.', img:'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=800', linkedin:'#' },
+  { id:'m2', name:'Omar Ali', role:'Data Scientist', bio:'Specializes in real-world ML and data pipelines, with emphasis on interpretability.', img:'https://images.unsplash.com/photo-1531123414780-f0d1a8f0d8f9?q=80&w=800', linkedin:'#' },
+  { id:'m3', name:'Sam K', role:'AI Researcher', bio:'Focus on applied ML and deployment best practices.', img:'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?q=80&w=800', linkedin:'#' },
+  { id:'m4', name:'Rita N', role:'Product Designer', bio:'Design systems, UX research and cross-functional product work.', img:'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800', linkedin:'#' }
+];
+
+const COHORTS = [
+  { title:'Frontend Development', date:'Nov 10, 2025 09:00:00' },
+  { title:'Data Science', date:'Nov 15, 2025 09:00:00' },
+  { title:'UI/UX Design', date:'Dec 2, 2025 09:00:00' }
+];
+
+/* =========================
+   DOM references
+   ========================= */
+const coursesGrid = document.getElementById('coursesGrid');
+const mentorsGrid = document.getElementById('mentorsGrid');
+const cohortList = document.getElementById('cohortList');
+const countdownTimer = document.getElementById('countdownTimer');
+const enrollBtn = document.getElementById('enrollNow');
+const filters = document.querySelectorAll('.filter-btn');
+const searchInput = document.getElementById('searchInput');
+const videoModal = document.getElementById('videoModal');
+const videoBody = document.getElementById('videoBody');
+const closeVideo = document.getElementById('closeVideo');
+const mentorModal = document.getElementById('mentorModal');
+const mentorBody = document.getElementById('mentorBody');
+const closeMentor = document.getElementById('closeMentor');
+const slider = document.getElementById('slides');
+const sliderControls = document.getElementById('sliderControls');
+const hamburger = document.getElementById('hamburger');
+const navPrimary = document.querySelector('nav.primary');
+
+/* =========================
+   Utility helpers
+   ========================= */
+function el(tag, attrs={}, children=''){
+  const e = document.createElement(tag);
+  for(const k in attrs) e.setAttribute(k, attrs[k]);
+  if(typeof children === 'string') e.innerHTML = children;
+  else if(Array.isArray(children)) children.forEach(c => e.appendChild(c));
+  return e;
+}
+
+/* =========================
+   Render Courses
+   ========================= */
+function renderCourses(list){
+  coursesGrid.innerHTML = '';
+  if(!list.length){
+    coursesGrid.innerHTML = '<div style="grid-column:1/-1;padding:1.2rem;background:var(--surface);border-radius:12px;box-shadow:var(--card-shadow);text-align:center;color:var(--muted)">No courses found</div>';
+    return;
+  }
+  list.forEach(c => {
+    const card = el('article',{class:'course-card','data-id':c.id});
+    card.innerHTML = `
+      <div class="course-media"><img src="${c.img}" alt="${c.title}"></div>
+      <div class="course-body">
+        <div class="course-meta">
+          <span class="level">${c.level.toUpperCase()}</span>
+          <span class="tag">${c.duration}</span>
+        </div>
+        <div class="course-title">${c.title}</div>
+        <div class="course-desc">${c.desc}</div>
+        <div class="course-actions">
+          <button class="btn-outline preview-btn" data-video="${c.video}" data-title="${c.title}">Preview</button>
+          <button class="btn btn-primary enroll-btn" data-course="${c.title}">Enroll</button>
+        </div>
+      </div>`;
+    coursesGrid.appendChild(card);
+  });
+}
+
+/* =========================
+   Filters & Search
+   ========================= */
+let activeFilter = 'all';
+filters.forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    filters.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    activeFilter = btn.dataset.filter;
+    applyFilters();
+    console.info('Filter changed:', activeFilter);
+  });
+});
+
+searchInput.addEventListener('input', () => {
+  applyFilters();
+});
+
+function applyFilters(){
+  const q = searchInput.value.trim().toLowerCase();
+  const filtered = COURSES.filter(c=>{
+    const matchesFilter = (activeFilter === 'all') ? true : c.level === activeFilter;
+    const matchesQuery = c.title.toLowerCase().includes(q) || c.desc.toLowerCase().includes(q);
+    return matchesFilter && matchesQuery;
+  });
+  renderCourses(filtered);
+}
+
+/* =========================
+   Render Mentors
+   ========================= */
+function renderMentors(){
+  mentorsGrid.innerHTML = '';
+  MENTORS.forEach(m=>{
+    const card = el('div',{class:'mentor-card','data-id':m.id});
+    card.innerHTML = `
+      <div class="mentor-photo"><img src="${m.img}" alt="${m.name}"></div>
+      <div class="mentor-name">${m.name}</div>
+      <div class="mentor-role">${m.role}</div>
+      <div style="margin-top:.6rem"><button class="btn-outline mentor-btn" data-id="${m.id}">View Profile</button></div>
+    `;
+    mentorsGrid.appendChild(card);
+  });
+}
+
+/* =========================
+   Render Cohorts
+   ========================= */
+function renderCohorts(){
+  cohortList.innerHTML = '';
+  COHORTS.forEach(c=>{
+    const it = el('div',{class:'cohort-item'});
+    it.innerHTML = `<strong>${c.title}</strong><div class="muted">${new Date(c.date).toLocaleDateString()}</div><div style="margin-top:.6rem"><button class="btn-outline quick-enroll" data-title="${c.title}" data-date="${c.date}">Reserve spot</button></div>`;
+    cohortList.appendChild(it);
+  });
+}
+
+/* =========================
+   Video Modal (preview)
+   ========================= */
+function openVideo(src, title='Preview'){
+  console.info('Opening preview for:', title);
+  videoBody.innerHTML = `<div style="padding:0"><video controls autoplay playsinline style="width:100%;height:auto;border-radius:6px"><source src="${src}" type="video/mp4">Your browser does not support video.</video></div>`;
+  videoModal.classList.add('active'); videoModal.setAttribute('aria-hidden','false');
+}
+function closeVideoModal(){
+  const v = videoBody.querySelector('video');
+  if(v){ v.pause(); v.src = ''; }
+  videoModal.classList.remove('active'); videoModal.setAttribute('aria-hidden','true'); videoBody.innerHTML = '';
+}
+
+/* =========================
+   Mentor Modal
+   ========================= */
+function openMentor(id){
+  const m = MENTORS.find(x=>x.id===id); if(!m) return;
+  mentorBody.innerHTML = `<div style="display:flex;gap:1rem;align-items:center">
+    <div style="flex:0 0 120px"><img src="${m.img}" alt="${m.name}" style="width:120px;height:120px;border-radius:12px;object-fit:cover"></div>
+    <div><h3 style="margin:0">${m.name}</h3><div style="color:var(--muted);margin:.2rem 0 1rem">${m.role}</div><p style="color:var(--muted)}">${m.bio}</p><div style="margin-top:.8rem"><a class="btn btn-primary" href="${m.linkedin}" target="_blank">Connect</a></div></div>
+  </div>`;
+  mentorModal.classList.add('active'); mentorModal.setAttribute('aria-hidden','false');
+  console.info('Viewing mentor profile:', m.name);
+}
+function closeMentorModal(){
+  mentorModal.classList.remove('active'); mentorModal.setAttribute('aria-hidden','true'); mentorBody.innerHTML = '';
+}
+
+/* =========================
+   Enrollment / Quick actions
+   ========================= */
+document.addEventListener('click', (e)=>{
+  if(e.target.matches('.preview-btn')){
+    e.preventDefault();
+    const src = e.target.dataset.video;
+    const title = e.target.dataset.title;
+    if(src) openVideo(src, title);
+    else{ alert('Preview not available.'); console.warn('Preview missing for', title); }
+  }
+
+  if(e.target.matches('.enroll-btn')){
+    const course = e.target.dataset.course;
+    console.log(`📝 Enrollment clicked for course: ${course}`);
+    alert(`Great choice — your interest in "${course}" has been recorded. Visit Admission to complete enrollment.`);
+  }
+
+  if(e.target.matches('.mentor-btn')){
+    const id = e.target.dataset.id;
+    openMentor(id);
+  }
+
+  if(e.target.matches('.quick-enroll')){
+    const title = e.target.dataset.title;
+    console.log(`🔔 Quick-reserve: ${title}`);
+    alert(`Reserved a spot for "${title}". We'll follow up by email.`);
+  }
+});
+
+/* =========================
+   Countdown Timer (next upcoming cohort)
+   ========================= */
+function startCountdown(){
+  // find the earliest cohort date in the future
+  const now = Date.now();
+  const future = COHORTS.map(c=>({title:c.title, when:new Date(c.date).getTime()})).filter(c=>c.when>now).sort((a,b)=>a.when-b.when);
+  const next = future.length ? future[0] : {title:'No upcoming cohorts', when:Date.now()+86400000};
+  let then = next.when;
+
+  function tick(){
+    const diff = then - Date.now();
+    if(diff <= 0){ countdownTimer.textContent = '0d 0h 0m 0s'; return; }
+    const days = Math.floor(diff / (1000*60*60*24));
+    const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+    const minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
+    const seconds = Math.floor((diff % (1000*60)) / 1000);
+    countdownTimer.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+  }
+
+  tick();
+  setInterval(tick, 1000);
+}
+enrollBtn.addEventListener('click', ()=>{ console.log('CTA: Enroll Now clicked'); location.href='admission.html'; });
+
+/* =========================
+   Slider (student experience)
+   ========================= */
+let slideIndex = 0;
+function setupSlider(){
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  sliderControls.innerHTML = '';
+  slides.forEach((s,i)=>{
+    const dot = el('button', {class:'btn-outline', 'aria-label':'Go to slide ' + (i+1)}, document.createTextNode(i+1));
+    dot.addEventListener('click', ()=> setSlide(i));
+    sliderControls.appendChild(dot);
+  });
+  function setSlide(i){
+    slideIndex = i;
+    const w = slider.clientWidth;
+    slider.style.transform = `translateX(-${i * 100}%)`;
+    Array.from(sliderControls.children).forEach((b,idx)=> b.style.opacity = idx===i ? '1' : '.6');
+  }
+  // auto rotate
+  setInterval(()=> setSlide((slideIndex+1) % slides.length), 6000);
+  setSlide(0);
+}
+
+/* =========================
+   Scroll reveal for elements with data-animate
+   ========================= */
+const animateEls = document.querySelectorAll('[data-animate]');
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.style.transform = 'none';
+      entry.target.style.opacity = 1;
+      entry.target.style.transition = 'transform .6s cubic-bezier(.2,.9,.3,1), opacity .6s';
+      observer.unobserve(entry.target);
+    }
+  });
+},{threshold:0.12});
+animateEls.forEach(el=>{
+  el.style.opacity = 0; el.style.transform = 'translateY(12px)';
+  observer.observe(el);
+});
+
+/* =========================
+   Mobile menu toggle
+   ========================= */
+hamburger.addEventListener('click', ()=>{
+  const expanded = hamburger.getAttribute('aria-expanded') === 'true';
+  hamburger.setAttribute('aria-expanded', String(!expanded));
+  navPrimary.style.display = expanded ? 'none' : 'flex';
+});
+
+/* =========================
+   Modal close handlers & keyboard
+   ========================= */
+closeVideo.addEventListener('click', closeVideoModal);
+closeMentor.addEventListener('click', closeMentorModal);
+
+document.addEventListener('keydown', (e)=>{
+  if(e.key === 'Escape'){ closeVideoModal(); closeMentorModal(); }
+});
+
+/* close modal when clicking backdrop */
+document.querySelectorAll('.modal').forEach(m=>{
+  m.addEventListener('click', (ev)=>{ if(ev.target === m){ m.classList.remove('active'); m.setAttribute('aria-hidden','true'); }});
+});
+
+/* =========================
+   Initial render calls
+   ========================= */
+renderCourses(COURSES);
+renderMentors();
+renderCohorts();
+startCountdown();
+setupSlider();
+
+/* Accessibility & extra console logs */
+console.info('Online Training page ready — courses loaded:', COURSES.length);
+console.info('Mentors loaded:', MENTORS.map(m=>m.name).join(', '));
+console.info('Upcoming cohorts:', COHORTS.map(c=>c.title).join('; '));
+
+</script>
+</body>
+</html>

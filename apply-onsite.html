@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apply Onsite — Prodigy Tech Hub</title>
+  <style>
+    :root {
+      --primary:#2563eb;
+      --accent:#3b82f6;
+      --bg:#f8fafc;
+      --card:#fff;
+      --text:#0f172a;
+      --muted:#64748b;
+      --radius:16px;
+    }
+
+    * {box-sizing:border-box; margin:0; padding:0;}
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    header {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:1.2rem 2rem;
+      background:#fff;
+      box-shadow:0 2px 12px rgba(0,0,0,.05);
+      position:sticky;
+      top:0;
+      z-index:100;
+    }
+    .logo {
+      font-weight:800;
+      font-size:1.3rem;
+      color:var(--primary);
+      text-decoration:none;
+    }
+    nav a {
+      margin:0 0.8rem;
+      text-decoration:none;
+      color:var(--text);
+      font-weight:600;
+      transition:color .3s;
+    }
+    nav a:hover {color:var(--accent);}
+
+    /* Hero Section */
+    .hero {
+      background:linear-gradient(135deg, #1e3a8a, #2563eb);
+      color:#fff;
+      padding:5rem 2rem 4rem;
+      text-align:center;
+      animation:fadeIn 0.8s ease;
+    }
+    .hero h1 {
+      font-size:2.4rem;
+      margin-bottom:.6rem;
+      letter-spacing:-.5px;
+    }
+    .hero p {
+      max-width:600px;
+      margin:0 auto 1.5rem;
+      color:rgba(255,255,255,.9);
+      font-size:1.1rem;
+    }
+    .hero .btn {
+      background:#fff;
+      color:var(--primary);
+      border:none;
+      padding:0.9rem 1.6rem;
+      border-radius:10px;
+      font-weight:700;
+      cursor:pointer;
+      transition:all .3s;
+    }
+    .hero .btn:hover {
+      background:var(--accent);
+      color:#fff;
+      transform:translateY(-3px);
+    }
+
+    /* Form Section */
+    section.form-section {
+      padding:3rem 1rem;
+      display:flex;
+      justify-content:center;
+    }
+    form {
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:0 10px 35px rgba(0,0,0,0.08);
+      padding:2.5rem;
+      width:100%;
+      max-width:600px;
+      animation:fadeUp 0.9s ease;
+    }
+    form h2 {
+      text-align:center;
+      margin-bottom:1rem;
+      font-size:1.6rem;
+      color:var(--primary);
+    }
+    .input-group {
+      margin-bottom:1.2rem;
+    }
+    label {
+      font-weight:600;
+      font-size:.9rem;
+      color:var(--muted);
+      display:block;
+      margin-bottom:.4rem;
+    }
+    input, select, textarea {
+      width:100%;
+      padding:0.8rem;
+      border:1px solid #e2e8f0;
+      border-radius:8px;
+      font-size:.95rem;
+      outline:none;
+      transition:border-color .3s;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color:var(--accent);
+      box-shadow:0 0 0 3px rgba(59,130,246,.15);
+    }
+    button.submit-btn {
+      width:100%;
+      background:var(--primary);
+      color:#fff;
+      border:none;
+      border-radius:10px;
+      padding:0.9rem;
+      font-size:1rem;
+      font-weight:700;
+      cursor:pointer;
+      transition:all .3s;
+    }
+    button.submit-btn:hover {
+      background:#1e40af;
+      transform:translateY(-2px);
+    }
+
+    #successMsg {
+      margin-top:1rem;
+      text-align:center;
+      font-weight:600;
+      color:green;
+      display:none;
+    }
+
+    /* Footer */
+    footer {
+      margin-top:auto;
+      background:#0f172a;
+      color:#fff;
+      text-align:center;
+      padding:1.2rem;
+      font-size:.9rem;
+    }
+    footer a {
+      color:#60a5fa;
+      text-decoration:none;
+      font-weight:600;
+    }
+    footer a:hover {text-decoration:underline;}
+
+    @keyframes fadeIn {from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:none;}}
+    @keyframes fadeUp {from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="logo">Prodigy Tech Hub</a>
+    <nav>
+      <a href="about.html">About</a>
+      <a href="training.html" class="active">Training</a>
+      <a href="courses.html">Courses</a>
+      <a href="admission.html">Admission</a>
+      <a href="portal.html">Portal</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Apply for Onsite Training</h1>
+    <p>Learn hands-on with mentors, team collaborations, and access to Prodigy’s physical campus facilities.</p>
+    <button class="btn" onclick="document.getElementById('applyForm').scrollIntoView({behavior:'smooth'})">Start Application</button>
+  </section>
+
+  <!-- FORM SECTION -->
+  <section class="form-section">
+    <form id="applyForm">
+      <h2>Onsite Training Application</h2>
+
+      <div class="input-group">
+        <label>Full Name</label>
+        <input type="text" id="fullname" required placeholder="Enter your full name">
+      </div>
+
+      <div class="input-group">
+        <label>Email Address</label>
+        <input type="email" id="email" required placeholder="example@gmail.com">
+      </div>
+
+      <div class="input-group">
+        <label>Phone Number</label>
+        <input type="tel" id="phone" required placeholder="+234 812 345 6789">
+      </div>
+
+      <div class="input-group">
+        <label>Preferred Course</label>
+        <select id="course" required>
+          <option value="">Select a course</option>
+          <option>Frontend Development</option>
+          <option>Data Science</option>
+          <option>Cybersecurity</option>
+          <option>UI/UX Design</option>
+          <option>Cloud Computing</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label>Why do you want to join onsite training?</label>
+        <textarea id="reason" rows="3" placeholder="Tell us briefly..."></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">Submit Application</button>
+
+      <p id="successMsg">🎉 Application submitted successfully!</p>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2025 Prodigy Tech Hub — All Rights Reserved.  
+    <br><a href="index.html">← Back to Home</a>
+  </footer>
+
+  <script>
+    const form = document.getElementById("applyForm");
+    const successMsg = document.getElementById("successMsg");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById("fullname").value.trim();
+      const course = document.getElementById("course").value;
+      const email = document.getElementById("email").value;
+
+      if (name && course && email) {
+        successMsg.style.display = "block";
+        console.log(`✅ Onsite Application Submitted:`);
+        console.log(`Name: ${name}`);
+        console.log(`Email: ${email}`);
+        console.log(`Course: ${course}`);
+        setTimeout(() => successMsg.style.display = "none", 4000);
+        form.reset();
+      } else {
+        alert("Please fill all required fields!");
+      }
+    });
+  </script>
+
+</body>
+</html>

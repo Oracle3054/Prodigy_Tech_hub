@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apply — Prodigy Tech Hub</title>
+  <style>
+    :root {
+      --primary:#2563eb;
+      --accent:#3b82f6;
+      --bg:#f8fafc;
+      --card:#fff;
+      --text:#0f172a;
+      --muted:#64748b;
+      --radius:16px;
+    }
+
+    * {box-sizing:border-box; margin:0; padding:0;}
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display:flex;
+      flex-direction:column;
+      min-height:100vh;
+    }
+
+    header {
+      background:#fff;
+      box-shadow:0 2px 10px rgba(0,0,0,.05);
+      padding:1.2rem 2rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      position:sticky;
+      top:0;
+      z-index:100;
+    }
+    .logo {
+      color:var(--primary);
+      text-decoration:none;
+      font-weight:800;
+      font-size:1.3rem;
+    }
+    nav a {
+      margin:0 .8rem;
+      text-decoration:none;
+      color:var(--text);
+      font-weight:600;
+      transition:color .3s;
+    }
+    nav a:hover {color:var(--accent);}
+
+    .hero {
+      text-align:center;
+      padding:4rem 1.5rem 3rem;
+      background:linear-gradient(135deg,#1e3a8a,#2563eb);
+      color:#fff;
+      animation:fadeIn 0.8s ease;
+    }
+    .hero h1 {
+      font-size:2.4rem;
+      font-weight:800;
+      margin-bottom:0.5rem;
+    }
+    .hero p {
+      color:rgba(255,255,255,.9);
+      max-width:650px;
+      margin:0 auto;
+      font-size:1.1rem;
+    }
+
+    .apply-options {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:2rem;
+      padding:3rem 2rem;
+      max-width:1100px;
+      margin:auto;
+    }
+    .option {
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:0 8px 25px rgba(0,0,0,0.06);
+      padding:2rem;
+      text-align:center;
+      transition:transform .3s,box-shadow .3s;
+    }
+    .option:hover {
+      transform:translateY(-5px);
+      box-shadow:0 12px 35px rgba(0,0,0,0.08);
+    }
+    .option h2 {
+      color:var(--primary);
+      margin-bottom:.5rem;
+      font-size:1.4rem;
+    }
+    .option p {
+      color:var(--muted);
+      margin-bottom:1.5rem;
+      font-size:.95rem;
+    }
+    .btn {
+      background:var(--primary);
+      color:#fff;
+      border:none;
+      padding:0.9rem 1.5rem;
+      border-radius:10px;
+      font-weight:700;
+      cursor:pointer;
+      transition:all .3s;
+      text-decoration:none;
+      display:inline-block;
+    }
+    .btn:hover {
+      background:#1e40af;
+      transform:translateY(-2px);
+    }
+
+    footer {
+      margin-top:auto;
+      background:#0f172a;
+      color:#fff;
+      text-align:center;
+      padding:1.2rem;
+      font-size:.9rem;
+    }
+    footer a {
+      color:#60a5fa;
+      text-decoration:none;
+    }
+
+    @keyframes fadeIn {from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:none;}}
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="logo">Prodigy Tech Hub</a>
+    <nav>
+      <a href="training.html">Training</a>
+      <a href="courses.html">Courses</a>
+      <a href="admission.html">Admission</a>
+      <a href="portal.html">Portal</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Apply for Training</h1>
+    <p>Choose your preferred mode of learning — Onsite or Online — and begin your journey with Prodigy Tech Hub.</p>
+  </section>
+
+  <!-- OPTIONS -->
+  <section class="apply-options">
+    <div class="option">
+      <h2>Onsite Training</h2>
+      <p>Experience real-time mentorship, teamwork, and access to physical labs and facilities on our campus.</p>
+      <a href="apply-onsite.html" class="btn">Apply Onsite</a>
+    </div>
+
+    <div class="option">
+      <h2>Online Cohort</h2>
+      <p>Join our live virtual cohorts, learn remotely from anywhere, and interact with top mentors in real time.</p>
+      <a href="apply-online.html" class="btn">Apply Online</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2025 Prodigy Tech Hub — All Rights Reserved.
+  </footer>
+
+</body>
+</html>

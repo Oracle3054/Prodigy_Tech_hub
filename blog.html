@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prodigy Tech Hub | Blog</title>
+  <style>
+    /* ==== GLOBAL ==== */
+    :root {
+      --primary: #007bff;
+      --dark: #0b0c10;
+      --light: #ffffff;
+      --muted: #6b7280;
+      --radius: 12px;
+      --transition: all 0.3s ease;
+      --shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: "Poppins", sans-serif;
+      background: #f9fafb;
+      color: #222;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+      transition: background 0.4s, color 0.4s;
+    }
+    a { text-decoration: none; color: inherit; }
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    /* ==== HEADER ==== */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: var(--light);
+      box-shadow: var(--shadow);
+      z-index: 1000;
+    }
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+    }
+    .logo img { height: 50px; }
+    nav a {
+      margin: 0 15px;
+      font-weight: 500;
+      color: var(--dark);
+      transition: var(--transition);
+    }
+    nav a:hover, nav a.active { color: var(--primary); }
+    .header-buttons { display: flex; align-items: center; gap: 15px; }
+    .btn-primary {
+      background: var(--primary);
+      color: var(--light);
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+    .btn-primary:hover { background: #005dc5; transform: translateY(-2px); }
+    #themeToggle {
+      background: transparent;
+      border: none;
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+
+    /* ==== HERO ==== */
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--light);
+      overflow: hidden;
+    }
+    .hero-images img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1.8s ease-in-out;
+      filter: brightness(0.6);
+    }
+    .hero-images img.active { opacity: 1; }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(8px);
+      padding: 40px;
+      border-radius: 16px;
+      animation: fadeInUp 1.2s ease;
+    }
+    .hero-content h1 span { color: var(--primary); }
+    .hero-content input {
+      margin-top: 20px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 8px;
+      width: 70%;
+      max-width: 400px;
+    }
+
+    @keyframes fadeInUp {
+      from { transform: translateY(40px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* ==== BLOG SECTION ==== */
+    section { padding: 100px 0; }
+    h2.section-title {
+      text-align: center;
+      color: var(--primary);
+      font-size: 2rem;
+      margin-bottom: 40px;
+    }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    .blog-card {
+      background: var(--light);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .blog-card:hover { transform: translateY(-8px); }
+    .blog-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+    .blog-content {
+      padding: 20px;
+    }
+    .read-more { color: var(--primary); font-weight: 600; }
+
+    /* ==== FOOTER ==== */
+    footer {
+      background: var(--dark);
+      color: var(--light);
+      padding: 60px 0 30px;
+    }
+    .footer-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 30px;
+    }
+    .footer-bottom {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    /* ==== DARK MODE ==== */
+    body.dark { background: #121212; color: #eee; }
+    body.dark header { background: #111; }
+    body.dark .blog-card { background: #1c1c1c; }
+  </style>
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="container header-content">
+      <a href="index.html" class="logo">
+        <img src="Resources/assets/icon_logo/prodigytechhub-web-logo.webp" alt="Prodigy Tech Hub Logo">
+      </a>
+      <nav>
+        <a href="courses.html">Courses</a>
+        <a href="project.html">Projects</a>
+        <a href="#" class="active">Blog</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <div class="header-buttons">
+        <button id="themeToggle">🌙</button>
+        <a href="#" class="btn-primary">Apply Now</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-images">
+      <img src="Resources/assets/11/2025-06-15 (1).webp" class="active" alt="Tech innovation">
+      <img src="Resources/assets/11/2025-06-15.jpg" alt="Developers collaborating">
+      <img src="Resources/assets/11/2025-06-23.webp" alt="Coding environment">
+    </div>
+    <div class="hero-content">
+      <h1>Welcome to <span>Prodigy Tech Hub Blog</span></h1>
+      <p>Your source for <strong>tech insights</strong>, <strong>trends</strong>, and <strong>innovation</strong>.</p>
+      <input type="text" placeholder="Search blog posts...">
+    </div>
+  </section>
+
+  <!-- BLOG GRID -->
+  <section class="container">
+    <h2 class="section-title">Latest Articles</h2>
+    <div class="blog-grid">
+      <article class="blog-card">
+        <img src="Resources/assets/11/🏠 AI in Smart Homes_ AI-powered smart homes can….jpeg" alt="">
+        <div class="blog-content">
+          <h3>Kickstart Your Tech Career</h3>
+          <p>Discover what makes Prodigy stand out in the tech education space.</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+      <article class="blog-card">
+        <img src="Resources/assets/11/🚀 Level Up with a Comprehensive Diploma in Data Science.jpeg" alt="">
+        <div class="blog-content">
+          <h3>Product Management Mastery</h3>
+          <p>Learn the essential skills that make a great product manager today.</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+      <article class="blog-card">
+        <img src="Resources/assets/11/HUBiquitous Talent Program_ Empowering the Next Generation of Tech Leaders in Ghana.jpeg" alt="">
+        <div class="blog-content">
+          <h3>The Rise of AI & Machine Learning</h3>
+          <p>Explore how AI is revolutionizing creativity and industries worldwide.</p>
+          <a href="#" class="read-more">Read More →</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footer-container">
+      <div>
+        <h4>About</h4>
+        <p>Empowering future innovators through mentorship and tech education.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <p><a href="#">Home</a> | <a href="#">Courses</a> | <a href="#">Blog</a></p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p>Email: admissions@prodigytechhub.com</p>
+        <p>Phone: +234 812 345 6789</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 Prodigy Tech Hub | Designed by Oracle
+    </div>
+  </footer>
+
+  <script>
+    // HERO SLIDER
+    const heroSlides = document.querySelectorAll('.hero-images img');
+    let heroIndex = 0;
+    setInterval(() => {
+      heroSlides[heroIndex].classList.remove('active');
+      heroIndex = (heroIndex + 1) % heroSlides.length;
+      heroSlides[heroIndex].classList.add('active');
+    }, 5000);
+
+    // DARK MODE TOGGLE
+    const toggle = document.getElementById('themeToggle');
+    toggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      toggle.textContent = document.body.classList.contains('dark') ? '☀️' : '🌙';
+    });
+  </script>
+</body>
+</html>

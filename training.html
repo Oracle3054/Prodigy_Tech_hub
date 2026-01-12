@@ -1,0 +1,651 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Training & Programmes — Prodigy Tech Hub</title>
+  <meta name="description" content="Training & Programmes at Prodigy Tech Hub — structured learning pathways, cohorts, mentorship and corporate solutions." />
+  <style>
+    /* ====== Root & Reset ====== */
+    :root{
+      --bg: #0b1220;
+      --panel: #0f172a;
+      --card: #0f172a;
+      --glass: rgba(255,255,255,0.03);
+      --primary: #2563eb;
+      --accent: #60a5fa;
+      --muted: #9aa7bf;
+      --text: #e6eefb;
+      --radius: 14px;
+      --maxw: 1200px;
+      --glass-2: rgba(255,255,255,0.02);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,#071029 0%, #071430 60%);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+    }
+    a{color:inherit}
+    img{max-width:100%;display:block}
+
+    /* ====== Page layout ====== */
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:0 1rem}
+
+    header.site-header{
+      position:sticky;top:0;z-index:1200;
+      backdrop-filter: blur(6px);
+      background: linear-gradient(180deg, rgba(6,10,20,0.55), rgba(6,10,20,0.35));
+      border-bottom:1px solid rgba(255,255,255,0.03);
+    }
+    .nav-inner{display:flex;align-items:center;gap:1rem;padding:.9rem 0;align-items:center}
+    .brand{display:flex;gap:.8rem;align-items:center}
+    .brand .logo-mark{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;font-weight:900;color:white;font-size:1rem;box-shadow:0 10px 30px rgba(37,99,235,0.12)}
+    .brand h1{font-size:1rem;margin:0;font-weight:800}
+    .brand .tag{font-size:.8rem;color:var(--muted)}
+
+    nav.primary{margin-left:2rem;display:flex;gap:1rem;align-items:center}
+    nav.primary a{color:var(--muted);text-decoration:none;padding:.35rem .6rem;border-radius:8px;font-weight:600;transition:all .18s}
+    nav.primary a.active, nav.primary a:hover{color:var(--text);background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02))}
+
+    .actions{margin-left:auto;display:flex;gap:.6rem;align-items:center}
+    .btn{padding:.5rem .9rem;border-radius:10px;border:none;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:.5rem}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text)}
+    .btn-primary{background:linear-gradient(90deg,var(--primary),var(--accent));color:white;box-shadow:0 10px 30px rgba(37,99,235,0.12)}
+
+    .hamburger{display:none;background:transparent;border-radius:8px;padding:.45rem;border:none}
+    .hamburger span{display:block;height:2px;width:18px;background:var(--text);margin:3px 0;transition:all .2s}
+    @media(max-width:920px){
+      nav.primary{display:none}
+      .hamburger{display:block}
+    }
+
+    main{padding:2.25rem 0 4rem}
+
+    /* ====== HERO ====== */
+    .hero{
+      position:relative;
+      border-radius:18px;
+      overflow:hidden;
+      margin-bottom:2.5rem;
+      box-shadow:0 20px 60px rgba(2,6,23,0.6);
+      background:linear-gradient(180deg, rgba(7,12,41,0.6), rgba(13,24,45,0.6));
+    }
+    /* subtle animated gradient */
+    .hero::before{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(120deg, rgba(37,99,235,0.12), rgba(96,165,250,0.08) 35%, rgba(0,0,0,0));
+      mix-blend-mode: screen;
+      pointer-events:none;
+      animation: drift 14s linear infinite;
+    }
+    @keyframes drift{ from{transform:translateX(-10%)} to{transform:translateX(10%)} }
+
+    .hero-grid{display:grid;grid-template-columns:1fr 460px;gap:2rem;align-items:center;padding:3.5rem}
+    @media(max-width:980px){ .hero-grid{grid-template-columns:1fr; padding:2.2rem} }
+
+    .hero-copy .eyebrow{display:inline-block;padding:.35rem .6rem;border-radius:999px;background:rgba(255,255,255,0.04);color:var(--accent);font-weight:700;margin-bottom:.7rem}
+    .hero-copy h2{font-size:2.1rem;margin:.25rem 0 0;line-height:1.05}
+    .hero-copy p.lead{color:var(--muted);margin-top:.65rem;max-width:52ch}
+
+    .hero-ctas{margin-top:1.1rem;display:flex;gap:.7rem;flex-wrap:wrap}
+    .hero-media{display:flex;align-items:center;justify-content:center}
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:1rem;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 10px 30px rgba(2,6,23,0.6)}
+    .hero-card img{width:420px;height:280px;object-fit:cover;border-radius:8px}
+    @media(max-width:980px){ .hero-card img{width:100%;height:220px} }
+
+    /* ====== MODE OPTIONS ====== */
+    .modes{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem}
+    @media(max-width:980px){ .modes{grid-template-columns:1fr} }
+    .mode-card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:12px;padding:1.1rem;border:1px solid rgba(255,255,255,0.03);
+      transition:transform .28s, box-shadow .28s;
+      display:flex;flex-direction:column;gap:.6rem;
+    }
+    .mode-card:hover{transform:translateY(-8px);box-shadow:0 22px 60px rgba(2,6,23,0.55)}
+    .mode-card .icon{width:48px;height:48px;border-radius:10px;background:linear-gradient(90deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;font-weight:800;color:white}
+    .mode-card h4{margin:.15rem 0 .1rem}
+    .mode-card p{color:var(--muted);font-size:.95rem}
+    .mode-card ul{margin:.45rem 0 0;padding-left:1rem;color:var(--muted)}
+    .mode-card .mode-cta{margin-top:auto;align-self:flex-start}
+
+    /* ====== PROGRAMME TABS ====== */
+    .programmes{margin:2rem 0}
+    .tabs{display:flex;gap:.6rem;background:transparent;flex-wrap:wrap;margin-bottom:1rem}
+    .tab-btn{background:transparent;border:1px solid rgba(255,255,255,0.03);padding:.5rem .9rem;border-radius:10px;color:var(--muted);cursor:pointer;font-weight:700}
+    .tab-btn.active{background:linear-gradient(90deg,var(--primary),var(--accent));color:white;box-shadow:0 10px 30px rgba(37,99,235,0.12)}
+    .tab-panel{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:1.2rem;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+    .track{display:grid;grid-template-columns:1fr 300px;gap:1rem;align-items:start}
+    @media(max-width:980px){ .track{grid-template-columns:1fr} }
+    .track .left p{color:var(--muted)}
+    .examples{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.6rem}
+    .chip{padding:.35rem .6rem;border-radius:999px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);font-weight:700;color:var(--muted)}
+
+    /* ====== Corporate cards ====== */
+    .corporate{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:2rem 0}
+    @media(max-width:980px){ .corporate{grid-template-columns:1fr} }
+    .corp-card{padding:1rem;border-radius:12px;background:linear-gradient(180deg,#07112a,#061226);border:1px solid rgba(255,255,255,0.03);transition:transform .2s}
+    .corp-card:hover{transform:translateY(-6px)}
+    .corp-card h4{margin:0}
+    .corp-cta{margin-top:1rem}
+
+    /* ====== Mentorship split ====== */
+    .mentorship{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:center;padding:1.2rem;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.0));border:1px solid rgba(255,255,255,0.03)}
+    .mentorship img{border-radius:10px;box-shadow:0 8px 30px rgba(2,6,23,0.6)}
+    .mentorship ul{list-style:disc;margin-left:1rem;color:var(--muted)}
+
+    /* ====== Cohorts section ====== */
+    .cohorts{display:flex;gap:1rem;align-items:center;justify-content:space-between;margin:2rem 0}
+    @media(max-width:980px){ .cohorts{flex-direction:column;align-items:stretch} }
+    .cohort-list{display:flex;flex-direction:column;gap:.6rem}
+    .cohort-item{padding:.85rem;border-radius:10px;background:linear-gradient(180deg,#07122b,#061429);border:1px solid rgba(255,255,255,0.03)}
+    .countdown{display:flex;gap:.6rem;align-items:center;padding:1rem;border-radius:10px;background:linear-gradient(90deg,var(--primary),var(--accent));color:#06203b;font-weight:800}
+
+    /* ====== Testimonials carousel ====== */
+    .testimonials{margin:2rem 0;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:1rem;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+    .slides{position:relative;overflow:hidden}
+    .slide{display:none;padding:1rem}
+    .slide.active{display:block;animation:fadeUp .6s ease}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+    .testimonial-meta{display:flex;gap:1rem;align-items:center}
+    .avatar{width:56px;height:56px;border-radius:10px;overflow:hidden}
+    .dots{display:flex;gap:.4rem;justify-content:center;margin-top:.8rem}
+    .dots button{width:10px;height:10px;border-radius:999px;border:none;background:rgba(255,255,255,0.06);cursor:pointer}
+    .dots button.active{background:linear-gradient(90deg,var(--primary),var(--accent));box-shadow:0 6px 18px rgba(37,99,235,0.12)}
+
+    /* ====== CTA ====== */
+    .final-cta{margin:2.5rem 0;padding:1.6rem;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));display:flex;align-items:center;justify-content:space-between;gap:1rem;border:1px solid rgba(255,255,255,0.03)}
+    @media(max-width:900px){ .final-cta{flex-direction:column;text-align:center} }
+
+    /* ====== Footer ====== */
+    footer.site-footer{margin-top:2rem;padding:1.6rem 0;color:var(--muted);border-top:1px solid rgba(255,255,255,0.03)}
+    footer .footer-grid{display:flex;gap:2rem;align-items:flex-start;justify-content:space-between;flex-wrap:wrap}
+
+    /* small helpers */
+    .muted{color:var(--muted)}
+    .center{text-align:center}
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="wrap nav-inner">
+      <a class="brand" href="index.html" aria-label="Prodigy home">
+        <div class="logo-mark" aria-hidden="true">P</div>
+        <div>
+          <h1>Prodigy Tech Hub</h1>
+          <div class="tag muted">Learn • Build • Launch</div>
+        </div>
+      </a>
+
+      <nav class="primary" aria-label="Main navigation">
+        <a href="about.html">About</a>
+        <a href="courses.html">Courses</a>
+        <a href="admission.html">Admission</a>
+        <a href="portal.html">Portal</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <div class="actions">
+        <a class="btn btn-ghost" href="courses.html">Browse Courses</a>
+        <a class="btn btn-primary" href="join-cohort.html">Join a Cohort</a>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="wrap hero" id="hero">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">Programs · Cohorts Open</span>
+          <h2>Transform Skills into Mastery</h2>
+          <p class="lead">Hands-on training paths designed to prepare you for real-world challenges. Project-driven, mentor-led, and career-focused.</p>
+          <div class="hero-ctas">
+            <a class="btn btn-primary" href="#programmes">Explore Programmes</a>
+            <a class="btn btn-ghost" href="admission.html">Join a Cohort</a>
+          </div>
+        </div>
+
+        <div class="hero-media">
+          <div class="hero-card" role="img" aria-label="students collaborating">
+            <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=1600&auto=format&fit=crop" alt="Students collaborating">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <!-- TRAINING MODE OPTIONS -->
+      <h3>Training Modes</h3>
+      <p class="muted">Choose a mode that fits your schedule and learning style.</p>
+
+      <div class="modes" id="modes">
+        <article class="mode-card" data-mode="onsite" tabindex="0">
+          <div class="icon">🏫</div>
+          <h4>Onsite Training</h4>
+          <p>In-person mentorship at Prodigy Campus — hands-on workshops, lab access and team collaboration.</p>
+          <ul>
+            <li>Industry-standard lab facilities</li>
+            <li>Live hackathons & workshops</li>
+            <li>Career fairs & employer meetups</li>
+          </ul>
+          <div class="mode-cta"><a class="btn btn-primary" href="admission.html#onsite">Apply Onsite</a></div>
+        </article>
+
+        <article class="mode-card" data-mode="online" tabindex="0" id="onlineTrainingCard">
+  <div class="icon">💻</div>
+  <h4>Online Training</h4>
+  <p>Live interactive sessions, recorded replays, community channels and virtual mentorship.</p>
+  <ul>
+    <li>Live classes & office hours</li>
+    <li>Video replays & resources</li>
+    <li>Slack community & peer groups</li>
+  </ul>
+  <div class="mode-cta">
+    <button class="btn btn-primary" id="joinLiveBtn">Join Live Class</button>
+  </div>
+</article>
+
+<script>
+  document.getElementById("joinLiveBtn").addEventListener("click", () => {
+    // Replace this with your real Google Meet or Zoom link
+    const liveLink = "https://meet.google.com/xyz-abcd-efg";
+    window.open(liveLink, "_blank"); // Opens in new tab
+    console.log("✅ Joining live online class via:", liveLink);
+  });
+</script>
+
+        <article class="mode-card" data-mode="hybrid" tabindex="0">
+          <div class="icon">🔁</div>
+          <h4>Hybrid Learning</h4>
+          <p>Mix of onsite and online learning — flexible schedules for working professionals and remote learners.</p>
+          <ul>
+            <li>Best of both worlds</li>
+            <li>Flexible attendance options</li>
+            <li>Recorded and in-person cohorts</li>
+          </ul>
+          <div class="mode-cta"><a class="btn btn-primary" href="admission.html#hybrid">Apply Hybrid</a></div>
+        </article>
+      </div>
+
+      <!-- PROGRAMME STRUCTURE -->
+      <section id="programmes" class="programmes" aria-labelledby="progTitle">
+        <h3 id="progTitle">Our Learning Pathways</h3>
+        <p class="muted">Structured tracks — beginner to advanced — each focused on project outcomes and job readiness.</p>
+
+        <div class="tabs" role="tablist" aria-label="Programme tracks">
+          <button class="tab-btn active" data-track="beginner" role="tab" aria-selected="true">Beginner Track</button>
+          <button class="tab-btn" data-track="intermediate" role="tab">Intermediate Track</button>
+          <button class="tab-btn" data-track="advanced" role="tab">Advanced Track</button>
+        </div>
+
+        <div class="tab-panel" id="panel-beginner" data-track-panel>
+          <div class="track">
+            <div class="left">
+              <h4>Beginner Track — 4 Weeks</h4>
+              <p class="muted">Foundational concepts and tools to start your tech journey: HTML, CSS, digital literacy and design thinking. Outcome: basic skill proficiency and a live portfolio piece.</p>
+              <div class="examples">
+                <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">Design Thinking</span><span class="chip">Portfolio</span>
+              </div>
+            </div>
+            <aside class="right muted">
+              <div><strong>Delivery:</strong> Online / Onsite</div>
+              <div style="margin-top:.5rem"><strong>Outcome:</strong> Live portfolio site & certificate</div>
+              <div style="margin-top:.6rem"><a class="btn btn-ghost" href="courses/web-development.html#html-css">View Details</a></div>
+            </aside>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="panel-intermediate" data-track-panel style="display:none">
+          <div class="track">
+            <div class="left">
+              <h4>Intermediate Track — 8 Weeks</h4>
+              <p class="muted">Project-based application: JavaScript, Python, UI/UX and real projects that make your CV stand out.</p>
+              <div class="examples">
+                <span class="chip">JavaScript</span><span class="chip">Python</span><span class="chip">UI/UX</span><span class="chip">Project</span>
+              </div>
+            </div>
+            <aside class="right muted">
+              <div><strong>Delivery:</strong> Online / Hybrid</div>
+              <div style="margin-top:.5rem"><strong>Outcome:</strong> Deployable projects & mentorship</div>
+              <div style="margin-top:.6rem"><a class="btn btn-ghost" href="courses/web-development.html#javascript">View Details</a></div>
+            </aside>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="panel-advanced" data-track-panel style="display:none">
+          <div class="track">
+            <div class="left">
+              <h4>Advanced Track — 12 Weeks</h4>
+              <p class="muted">Mastery & specialization: React, Node, Machine Learning, Cybersecurity — prepare for industry roles.</p>
+              <div class="examples">
+                <span class="chip">React</span><span class="chip">Node</span><span class="chip">ML</span><span class="chip">Security</span>
+              </div>
+            </div>
+            <aside class="right muted">
+              <div><strong>Delivery:</strong> Hybrid / Onsite</div>
+              <div style="margin-top:.5rem"><strong>Outcome:</strong> Industry-ready project & hiring support</div>
+              <div style="margin-top:.6rem"><a class="btn btn-ghost" href="courses/ai.html">View Details</a></div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- CORPORATE & CUSTOM -->
+      <h3>Corporate & Specialized Training</h3>
+      <p class="muted">We partner with organizations to build tailored upskilling paths for teams and institutions.</p>
+
+      <div class="corporate" aria-label="Corporate offerings">
+        <div class="corp-card">
+          <h4>Corporate Team Training</h4>
+          <p class="muted">Custom pathways focused on team skill gaps, delivered onsite or virtually.</p>
+          <div class="corp-cta"><button class="btn btn-primary" data-open-modal="corporate">Request Custom Programme</button></div>
+        </div>
+        <div class="corp-card">
+          <h4>Tech Bootcamps for Schools</h4>
+          <p class="muted">Short-term intensive bootcamps designed for secondary and tertiary institutions.</p>
+          <div class="corp-cta"><button class="btn btn-primary" data-open-modal="corporate">Request Bootcamp</button></div>
+        </div>
+        <div class="corp-card">
+          <h4>Workshops for Startups</h4>
+          <p class="muted">Hands-on workshops tailored to product teams and founders.</p>
+          <div class="corp-cta"><button class="btn btn-primary" data-open-modal="corporate">Request Workshop</button></div>
+        </div>
+      </div>
+
+      <!-- Mentorship -->
+      <h3>Mentorship that Guides You</h3>
+      <div class="mentorship" role="region" aria-label="Mentorship support">
+        <div><img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1200&auto=format&fit=crop" alt="Mentor and student" /></div>
+        <div>
+          <h4>1-on-1 mentorship & weekly reviews</h4>
+          <p class="muted">Each learner is paired with an industry mentor who offers weekly project reviews, portfolio feedback, and career guidance.</p>
+          <ul>
+            <li>1-on-1 Mentorship</li>
+            <li>Weekly Project Reviews</li>
+            <li>Alumni Network Access</li>
+            <li>Career & Internship Guidance</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- UPCOMING COHORTS -->
+      <section class="cohorts" aria-labelledby="cohortTitle">
+        <div>
+          <h3 id="cohortTitle">Join the Next Cohort</h3>
+          <p class="muted">Secure your spot — limited seats available per cohort.</p>
+
+          <div class="cohort-list" id="cohortList">
+            <div class="cohort-item">
+              <strong>Frontend Development</strong> — Nov 10, 2025
+            </div>
+            <div class="cohort-item">
+              <strong>Data Science</strong> — Nov 15, 2025
+            </div>
+            <div class="cohort-item">
+              <strong>UI/UX Design</strong> — Dec 2, 2025
+            </div>
+            <div style="margin-top:.8rem">
+              <a class="btn btn-primary" href="admission.html">Enroll Now</a>
+              <a class="btn btn-ghost" href="courses.html">View Full Schedule</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="countdown" aria-live="polite">
+          <div>
+            <div style="font-size:.9rem">Next Cohort Starts In</div>
+            <div id="countdownTimer" style="font-size:1.15rem;margin-top:.3rem">—</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials -->
+      <section class="testimonials" aria-labelledby="testiTitle">
+        <h3 id="testiTitle">Our Learners, Their Success</h3>
+        <div class="slides" id="testiSlides">
+          <div class="slide active" data-index="0">
+            <blockquote>"Prodigy’s project-first approach got me hired within 3 months." — <strong>Amaka, Frontend Dev</strong></blockquote>
+          </div>
+          <div class="slide" data-index="1">
+            <blockquote>"The mentorship and portfolio reviews were game changers." — <strong>Kelechi, Data Analyst</strong></blockquote>
+          </div>
+          <div class="slide" data-index="2">
+            <blockquote>"Real employers reviewed my final project during demo day." — <strong>David, ML Engineer</strong></blockquote>
+          </div>
+        </div>
+        <div class="dots" id="testiDots" aria-hidden="false"></div>
+      </section>
+
+      <!-- CTA -->
+      <section class="final-cta">
+        <div>
+          <h3>Ready to Begin Your Journey?</h3>
+          <p class="muted">Join a cohort, learn by building, and launch your career with Prodigy.</p>
+        </div>
+        <div style="display:flex;gap:.6rem;align-items:center">
+          <a class="btn btn-primary" href="admission.html">Join Now</a>
+          <a class="btn btn-ghost" href="portal.html">Visit Student Portal</a>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <!-- CORPORATE REQUEST MODAL -->
+  <div id="corpModal" role="dialog" aria-modal="true" style="display:none;position:fixed;inset:0;align-items:center;justify-content:center;background:rgba(2,6,23,0.6);z-index:1400;padding:1rem">
+    <div style="width:100%;max-width:720px;background:linear-gradient(180deg,#07112a,#061226);padding:1.2rem;border-radius:12px;color:var(--text);border:1px solid rgba(255,255,255,0.03);box-shadow:0 30px 80px rgba(2,6,23,0.7);position:relative">
+      <button id="closeCorp" style="position:absolute;right:12px;top:10px;background:transparent;border:none;color:var(--muted);font-size:1.4rem;cursor:pointer">×</button>
+      <h3>Request a Custom Programme</h3>
+      <p class="muted">Tell us about your team or institution and we'll craft a tailored solution.</p>
+      <form id="corpForm" style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:.6rem">
+        <input type="text" id="orgName" placeholder="Organization / School" required style="padding:.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--text)" />
+        <input type="text" id="contactName" placeholder="Contact name" required style="padding:.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--text)" />
+        <input type="email" id="contactEmail" placeholder="Contact email" required style="padding:.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--text)" />
+        <input type="tel" id="contactPhone" placeholder="Phone" style="padding:.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--text)" />
+        <textarea id="corpDetails" rows="4" placeholder="Programme goals, team size, timeline" style="grid-column:1 / -1;padding:.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--text)" required></textarea>
+        <div style="grid-column:1 / -1;display:flex;gap:.5rem;justify-content:flex-end">
+          <button type="button" id="corpCancel" class="btn btn-ghost">Cancel</button>
+          <button type="submit" class="btn btn-primary">Send Request</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div>
+        <a class="brand" href="index.html" style="display:flex;gap:.6rem;align-items:center;text-decoration:none;color:var(--text)">
+          <div class="logo-mark" style="width:44px;height:44px;font-size:1rem">P</div>
+          <div>
+            <strong>Prodigy Tech Hub</strong>
+            <div class="muted" style="font-size:.85rem">Learn • Build • Launch</div>
+          </div>
+        </a>
+        <p class="muted" style="margin-top:.7rem">Hands-on training & career support for ambitious learners.</p>
+      </div>
+
+      <div>
+        <h4>Quick Links</h4>
+        <nav class="muted" style="display:flex;flex-direction:column;gap:.4rem">
+          <a href="index.html">Home</a>
+          <a href="courses.html">Courses</a>
+          <a href="blog.html">Blog</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+
+      <div>
+        <h4>Contact</h4>
+        <div class="muted">📞 +234 800 000 0000</div>
+        <div class="muted">✉️ hello@prodigyhub.ng</div>
+      </div>
+    </div>
+
+    <div class="wrap center" style="margin-top:1rem;border-top:1px solid rgba(255,255,255,0.03);padding-top:1rem">
+      <small class="muted">© 2025 Prodigy Tech Hub • Designed with care</small>
+    </div>
+  </footer>
+
+  <script>
+    /* ====== JavaScript: interactions & animations ====== */
+    console.log("%c📚 Training page loaded — Prodigy Tech Hub", "color:#60a5fa;font-weight:bold");
+
+    // Mobile menu toggle (simple)
+    const hamburger = document.getElementById('hamburger');
+    hamburger && hamburger.addEventListener('click', () => {
+      const nav = document.querySelector('nav.primary');
+      if (nav.style.display === 'flex') { nav.style.display = ''; hamburger.setAttribute('aria-expanded','false'); console.log("📱 Mobile nav closed"); }
+      else { nav.style.display = 'flex'; hamburger.setAttribute('aria-expanded','true'); console.log("📱 Mobile nav opened"); }
+    });
+
+    // Mode card focus/click logs
+    document.querySelectorAll('.mode-card').forEach(card=>{
+      card.addEventListener('click', ()=> {
+        const mode = card.dataset.mode;
+        console.log(`🔎 Mode selected: ${mode}`);
+      });
+      card.addEventListener('keyup', (e)=> { if(e.key === 'Enter') card.click(); });
+    });
+
+    // Tabs (programme tracks)
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('[data-track-panel]');
+    tabBtns.forEach(btn=>{
+      btn.addEventListener('click', () => {
+        tabBtns.forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const track = btn.dataset.track;
+        panels.forEach(p => p.style.display = (p.id.includes(track) ? 'block' : 'none'));
+        console.log(`🧭 Track opened: ${track}`);
+      });
+    });
+
+    // Corporate modal open/close
+    const corpModal = document.getElementById('corpModal');
+    document.querySelectorAll('[data-open-modal="corporate"]').forEach(b=>{
+      b.addEventListener('click', () => {
+        corpModal.style.display = 'flex';
+        console.log("✉️ Corporate request modal opened");
+      });
+    });
+    document.getElementById('closeCorp').addEventListener('click', closeCorp);
+    document.getElementById('corpCancel').addEventListener('click', closeCorp);
+    function closeCorp(){ corpModal.style.display = 'none'; console.log("✉️ Corporate request modal closed"); }
+
+    // Corporate form submit (demo)
+    document.getElementById('corpForm').addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const payload = {
+        org: document.getElementById('orgName').value.trim(),
+        contact: document.getElementById('contactName').value.trim(),
+        email: document.getElementById('contactEmail').value.trim(),
+        phone: document.getElementById('contactPhone').value.trim(),
+        details: document.getElementById('corpDetails').value.trim()
+      };
+      console.log("📨 Corporate request submitted:", payload);
+      alert('Request sent — thank you! (Demo)');
+      closeCorp();
+      e.target.reset();
+    });
+
+    // Countdown timer for next cohort (next date: Nov 10, 2025 @ 00:00)
+    // Find the nearest start date from the list
+    const cohortDates = [
+      {label:'Frontend Development', date: new Date('2025-11-10T00:00:00')},
+      {label:'Data Science', date: new Date('2025-11-15T00:00:00')},
+      {label:'UI/UX Design', date: new Date('2025-12-02T00:00:00')}
+    ];
+    function getNextCohort(){
+      const now = new Date();
+      return cohortDates.find(c => c.date > now) || cohortDates[0];
+    }
+    const next = getNextCohort();
+    console.log("⏱ Next cohort:", next.label, next.date.toISOString());
+    const timerEl = document.getElementById('countdownTimer');
+
+    function updateCountdown(){
+      const now = new Date();
+      const diff = next.date - now;
+      if(diff <= 0){ timerEl.textContent = 'Starting soon'; clearInterval(countdownInterval); return; }
+      const days = Math.floor(diff / (1000*60*60*24));
+      const hours = Math.floor((diff / (1000*60*60)) % 24);
+      const mins = Math.floor((diff / (1000*60)) % 60);
+      const secs = Math.floor((diff / 1000) % 60);
+      timerEl.textContent = `${days}d ${hours}h ${mins}m ${secs}s`;
+    }
+    updateCountdown();
+    const countdownInterval = setInterval(updateCountdown, 1000);
+
+    // Testimonials carousel
+    const slides = document.querySelectorAll('.slide');
+    const dotsContainer = document.getElementById('testiDots');
+    slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.addEventListener('click', () => showSlide(i));
+      dotsContainer.appendChild(dot);
+      if(i===0) dot.classList.add('active');
+    });
+    let slideIndex = 0;
+    function showSlide(i){
+      slides.forEach(s => s.classList.remove('active'));
+      slides[i].classList.add('active');
+      dotsContainer.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+      dotsContainer.querySelectorAll('button')[i].classList.add('active');
+      slideIndex = i;
+      console.log(`💬 Testimonial shown: #${i}`);
+    }
+    function nextSlide(){ showSlide((slideIndex + 1) % slides.length); }
+    let testiInterval = setInterval(nextSlide, 6000);
+    document.getElementById('testiSlides').addEventListener('mouseenter', ()=> clearInterval(testiInterval));
+    document.getElementById('testiSlides').addEventListener('mouseleave', ()=> testiInterval = setInterval(nextSlide, 6000));
+
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.mode-card, .tab-panel, .corp-card, .mentorship, .cohort-item, .testimonials, .final-cta');
+    const revObs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          entry.target.style.transform = 'none';
+          entry.target.style.opacity = 1;
+          revObs.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.12});
+    revealEls.forEach(el=>{
+      el.style.opacity = 0;
+      el.style.transform = 'translateY(10px)';
+      revObs.observe(el);
+    });
+
+    // Smooth scrolling for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const target = document.querySelector(a.getAttribute('href'));
+        if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth', block:'start'}); console.log('🔎 Scrolled to', a.getAttribute('href')); }
+      });
+    });
+
+    // Accessibility: keyboard for modal close
+    document.addEventListener('keydown', e => {
+      if(e.key === 'Escape'){
+        if(corpModal.style.display === 'flex'){ closeCorp(); }
+      }
+    });
+
+    // Safe console: show important actions
+    console.log('%cℹ️ Interactions will appear in console while testing.', 'color:#9aa7bf');
+
+  </script>
+</body>
+</html>

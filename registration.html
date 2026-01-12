@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prodigy — Course Registration</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --brand: #2563eb;
+      --accent: #60a5fa;
+      --muted: #6b7280;
+      --bg: #f1f5f9;
+      --white: #fff;
+      --radius: 14px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: #1e293b;
+      line-height: 1.6;
+    }
+    header {
+      background: var(--white);
+      padding: 1.2rem 3rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    header h1 {
+      font-size: 1.5rem;
+      color: var(--brand);
+      font-weight: 700;
+    }
+    nav a {
+      text-decoration: none;
+      color: #475569;
+      font-weight: 500;
+      margin-left: 1.8rem;
+      transition: color 0.3s;
+    }
+    nav a:hover, nav a.active { color: var(--brand); }
+
+    .hero {
+      background: linear-gradient(135deg, #f9fbff 0%, #e8f0ff 100%);
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+    .hero h2 {
+      color: #0f172a;
+      font-size: 2.2rem;
+      margin-bottom: .5rem;
+    }
+    .hero p {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 2.5rem auto;
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from {opacity:0; transform:translateY(20px);}
+      to {opacity:1; transform:translateY(0);}
+    }
+
+    label { font-weight: 600; margin-top: 1rem; display: block; }
+    input, select {
+      width: 100%;
+      padding: .8rem;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+      margin-top: .5rem;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border .2s;
+    }
+    input:focus, select:focus { border-color: var(--brand); }
+
+    .row { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .col { flex: 1; min-width: 260px; }
+
+    .btn {
+      background: var(--brand);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: .9rem 1.6rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+    .btn:hover { background: #1e40af; transform: translateY(-2px); }
+    .btn[disabled] { opacity: 0.6; cursor: not-allowed; }
+
+    .terms {
+      background: #f8fafc;
+      padding: 1rem;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+      height: 130px;
+      overflow-y: auto;
+      margin-top: .5rem;
+    }
+
+    .success {
+      margin-top: 1.5rem;
+      background: #ecfdf5;
+      border: 1px solid #bbf7d0;
+      color: #166534;
+      padding: 1rem;
+      border-radius: 10px;
+      display: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Prodigy Tech Hub</h1>
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="courses.html">Courses</a>
+      <a href="registration.html" class="active">Register</a>
+      <a href="payments.html">Payments</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>3-Month Crash Courses</h2>
+    <p>Register for <strong>UI/UX Design</strong>, <strong>Web Development</strong>, or <strong>Digital Marketing</strong> — available in physical or virtual modes.</p>
+  </section>
+
+  <div class="container">
+    <h3>Registration Form</h3>
+    <form id="regForm">
+      <div class="row">
+        <div class="col">
+          <label>Full Name</label>
+          <input type="text" id="name" placeholder="Your full name" required />
+        </div>
+        <div class="col">
+          <label>Email</label>
+          <input type="email" id="email" placeholder="you@example.com" required />
+        </div>
+      </div>
+
+      <label>Choose Course</label>
+      <select id="course">
+        <option value="uiux">DA-EXEL UI/UX</option>
+        <option value="webdev">Web Development</option>
+        <option value="digital">Digital Marketing</option>
+      </select>
+
+      <label>Mode</label>
+      <div>
+        <label><input type="radio" name="mode" value="virtual" checked /> Virtual</label>
+        <label style="margin-left:15px;"><input type="radio" name="mode" value="physical" /> Physical</label>
+      </div>
+
+      <label>Start Cohort</label>
+      <select id="cohort">
+        <option value="2025-11-10">November 10, 2025</option>
+        <option value="2025-11-11">November 11, 2025</option>
+      </select>
+
+      <label>Terms & Conditions</label>
+      <div class="terms">
+        <p>By registering, you agree to attend all sessions and complete course requirements. Fees are non-refundable except in cancellations initiated by Prodigy.</p>
+      </div>
+
+      <label><input type="checkbox" id="agree" /> I accept the terms & conditions</label>
+
+      <div style="margin-top:1rem;">
+        <button type="button" id="registerBtn" class="btn">Register</button>
+      </div>
+      <div id="message" class="success"></div>
+    </form>
+  </div>
+
+  <footer>© 2025 Prodigy Tech Hub. All rights reserved.</footer>
+
+  <script>
+    const registerBtn = document.getElementById("registerBtn");
+    const message = document.getElementById("message");
+
+    registerBtn.addEventListener("click", () => {
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const agree = document.getElementById("agree").checked;
+      if (!name || !email) { alert("Please fill in all required fields."); return; }
+      if (!agree) { alert("You must accept the terms."); return; }
+      message.style.display = "block";
+      message.innerHTML = `<strong>Success!</strong> Thank you ${name}, your registration is confirmed.`;
+      registerBtn.disabled = true;
+      registerBtn.textContent = "Registered";
+    });
+  </script>
+</body>
+</html>

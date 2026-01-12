@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Prodigy — Demo Pay (Student)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body{font-family:Poppins,system-ui,Arial;margin:24px;background:#f6f9ff;color:#0b1220}
+    .card{max-width:720px;margin:0 auto;background:#fff;padding:20px;border-radius:12px;box-shadow:0 10px 30px rgba(10,20,40,.06)}
+    h2{color:#2563eb} label{display:block;margin-top:12px;font-weight:600}
+    input,select{width:100%;padding:10px;border-radius:8px;border:1px solid #e6eefc;margin-top:6px}
+    .btn{background:#2563eb;color:#fff;padding:10px 14px;border-radius:10px;border:0;font-weight:700;cursor:pointer;margin-top:12px}
+    .note{color:#64748b;font-size:13px;margin-top:8px}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Pay Tuition (Demo)</h2>
+    <p class="note">This demo uses Paystack test env. Use test card 4084 0840 8404 8404 (MM/YY any future, CVC any 3 digits).</p>
+
+    <label>Full name</label>
+    <input id="name" placeholder="John Doe">
+
+    <label>Email</label>
+    <input id="email" placeholder="john@example.com">
+
+    <label>Amount (NGN)</label>
+    <input id="amount" type="number" value="5000">
+
+    <label>Course</label>
+    <select id="course">
+      <option>Web Development</option>
+      <option>UI/UX</option>
+      <option>Digital Marketing</option>
+    </select>
+
+    <button id="payBtn" class="btn">Pay with Paystack</button>
+    <div id="status" class="note"></div>
+  </div>
+
+  <!-- Paystack inline script (test) -->
+  <!-- Replace PUBLIC_KEY with your Paystack test/public key when ready -->
+  <script src="service.js"></script>
+  <script>
+    // Replace with your Paystack public key (test): e.g. 'pk_test_xxx'
+    const PAYSTACK_PUBLIC_KEY = 'pk_test_xxxxxxxxxxxxxxxxxxxxxxxxx';
+
+    function showStatus(msg){
+      document.getElementById('status').textContent = msg;
+    }
+
+    document.getElementById('payBtn').addEventListener('click', function(){
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const amount = Number(document.getElementById('amount').value);
+      const course = document.getElementById('course').value;
+
+      if(!name || !email || !amount || amount <= 0){ alert('Please fill name, email and a valid amount.'); return; }
+
+      // Create a transaction reference — the server could also create this and initialize payment
+      const txRef = 'STU-' + Date.now();
+
+      // Open Paystack inline
+      const handler = PaystackPop.setup({
+        key: PAYSTACK_PUBLIC_KEY,
+        email: email,
+        amount: amount * 100, // kobo
+        ref: txRef,
+        metadata: {
+          student_name: name,
+          course: course
+        },
+        onClose: function(){
+          showStatus('Payment popup closed.');
+        },
+        callback: function(response){
+          // response.reference has the Paystack reference
+          showStatus('Payment complete. Verifying...');
+          // Notify your server to verify & record (server verifies with secret key)
+          fetch('/verify', {
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({
+              paystack_reference: response.reference,
+              tx_ref: txRef,
+              student_name: name,
+              email: email,
+              amount: amount,
+              course: course
+            })
+          }).then(r=>r.json()).then(data=>{
+            if(data.ok){
+              showStatus('Payment verified — thank you!');
+              // optionally redirect to student dashboard
+              setTimeout(()=> window.location.href = '/student-dashboard', 900);
+            } else {
+              showStatus('Verification failed: ' + (data.message||'unknown'));
+            }
+          }).catch(err=>{
+            showStatus('Server error while verifying payment.');
+            console.error(err);
+          });
+        }
+      });
+
+      handler.openIframe();
+    });
+
+    // server.js
+import express from "express";
+import fetch from "node-fetch";
+
+const app = express();
+app.use(express.json());
+
+const PAYSTACK_SECRET_KEY = "sk_test_your_secret_key_here";
+
+app.post("/verify", async (req, res) => {
+  const { paystack_reference } = req.body;
+  const r = await fetch(`https://api.paystack.co/transaction/verify/${paystack_reference}`, {
+    headers: { Authorization: `Bearer ${PAYSTACK_SECRET_KEY}` }
+  });
+  const data = await r.json();
+
+  if (data.status && data.data.status === "success") {
+    // ✅ Save payment to DB (optional)
+    res.json({ ok: true });
+  } else {
+    res.json({ ok: false, message: data.message });
+  }
+});
+
+app.listen(3000, () => console.log("Server running on port 3000"));
+
+  </script>
+</body>
+</html>

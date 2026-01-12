@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Student Portal — Prodigy Tech Hub</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --primary: #2563eb;
+      --secondary: #1e3a8a;
+      --text: #0f172a;
+      --muted: #64748b;
+      --radius: 14px;
+      --shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    /* LOGIN CARD */
+    .login-container {
+      background: var(--card);
+      width: 100%;
+      max-width: 420px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 2.5rem;
+      text-align: center;
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo {
+      width: 80px;
+      height: 80px;
+      border-radius: 16px;
+      object-fit: cover;
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.25);
+      margin-bottom: 1.2rem;
+    }
+
+    h2 { margin-bottom: 0.4rem; font-weight: 700; color: var(--text); }
+    p.sub { margin-bottom: 1.5rem; color: var(--muted); }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      text-align: left;
+    }
+
+    label {
+      font-size: .85rem;
+      color: var(--muted);
+    }
+
+    input {
+      width: 100%;
+      padding: .8rem;
+      border-radius: 8px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      font-size: .95rem;
+      outline: none;
+      transition: 0.3s ease;
+    }
+
+    input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    }
+
+    button {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.9rem;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: var(--secondary);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 15px rgba(37, 99, 235, 0.25);
+    }
+
+    .footer {
+      margin-top: 1.4rem;
+      font-size: .9rem;
+      color: var(--muted);
+    }
+
+    .footer a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    #message {
+      margin-top: 1rem;
+      font-weight: 600;
+    }
+
+    /* DASHBOARD PREVIEW */
+    .dashboard {
+      display: none;
+      flex-direction: column;
+      min-height: 100vh;
+      animation: fadeInDash 1s ease forwards;
+    }
+
+    @keyframes fadeInDash {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .dashboard-header {
+      background: linear-gradient(135deg, var(--secondary), var(--primary));
+      color: #fff;
+      padding: 2rem;
+      text-align: center;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+    }
+
+    .dashboard-header h1 {
+      font-size: 2rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .portal-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      padding: 3rem;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    .portal-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 1.8rem;
+      box-shadow: var(--shadow);
+      transition: all 0.4s ease;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .portal-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .portal-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(37, 99, 235, 0.2);
+    }
+
+    .portal-card h3 {
+      color: var(--primary);
+      margin-bottom: .6rem;
+    }
+
+    .portal-card p {
+      color: var(--muted);
+      font-size: .95rem;
+      line-height: 1.5;
+    }
+
+    .logout-btn {
+      margin: 2rem auto;
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.9rem 2rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .logout-btn:hover {
+      background: var(--secondary);
+      transform: translateY(-3px);
+    }
+
+    @media (max-width: 600px) {
+      .portal-content { padding: 2rem; }
+      .dashboard-header h1 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- LOGIN -->
+  <div class="login-container" id="loginContainer">
+    <img src="Resources/assets/icon_logo/80b8cd18c4762f3092df8ba1ed64a4ad.jpg" class="logo" alt="Prodigy Logo" />
+    <h2>Welcome Back</h2>
+    <p class="sub">Sign in to your Prodigy Tech Hub Portal</p>
+
+    <form id="loginForm">
+      <div>
+        <label>Username</label>
+        <input type="text" id="username" placeholder="Enter your username" required />
+      </div>
+      <div>
+        <label>Password</label>
+        <input type="password" id="password" placeholder="Enter your password" required />
+      </div>
+      <button type="submit">Login</button>
+    </form>
+
+    <p id="message"></p>
+
+    <div class="footer">
+      Don’t have an account? <a href="registration.html">Register</a>
+    </div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="dashboard" id="dashboard">
+    <div class="dashboard-header">
+      <h1>Hello, <span id="userDisplay"></span> 👋</h1>
+      <p>Welcome to your Student Dashboard — manage your growth with Prodigy Tech Hub.</p>
+    </div>
+
+    <div class="portal-content">
+      <div class="portal-card reveal" onclick="navigateTo('profile.html')">
+        <h3>👤 Profile</h3>
+        <p>View and update your student details, profile photo, and security settings.</p>
+      </div>
+      <div class="portal-card reveal" onclick="navigateTo('courses.html')">
+        <h3>🎓 Courses</h3>
+        <p>Track your learning, access materials, and monitor your completion rate.</p>
+      </div>
+      <div class="portal-card reveal" onclick="navigateTo('assignments.html')">
+        <h3>📝 Assignments</h3>
+        <p>View pending assignments, upload submissions, and get instructor feedback.</p>
+      </div>
+      <div class="portal-card reveal" onclick="navigateTo('payments.html')">
+        <h3>💳 Payments</h3>
+        <p>Manage tuition payments, view receipts, and track your payment history.</p>
+      </div>
+      <div class="portal-card reveal" onclick="navigateTo('project.html')">
+        <h3>📈 Project</h3>
+        <p>Check your course grades and detailed performance analysis in real time.</p>
+      </div>
+      <div class="portal-card reveal" onclick="navigateTo('messages.html')">
+        <h3>💬 Messages</h3>
+        <p>Chat with admins or instructors and stay informed about class updates.</p>
+      </div>
+      <div class="portal-card reveal" onclick="navigateTo('settings.html')">
+        <h3>⚙️ Settings</h3>
+        <p>Update your password, manage notifications, and customize your preferences.</p>
+      </div>
+    </div>
+
+    <button class="logout-btn" id="logoutBtn">Logout</button>
+  </div>
+
+  <script>
+    const form = document.getElementById("loginForm");
+    const loginContainer = document.getElementById("loginContainer");
+    const dashboard = document.getElementById("dashboard");
+    const message = document.getElementById("message");
+    const userDisplay = document.getElementById("userDisplay");
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if (username === "admin" && password === "1234") {
+        message.textContent = "Login successful! Redirecting...";
+        message.style.color = "green";
+        setTimeout(() => {
+          loginContainer.style.display = "none";
+          dashboard.style.display = "flex";
+          userDisplay.textContent = username;
+        }, 1000);
+      } else {
+        message.textContent = "Invalid credentials.";
+        message.style.color = "red";
+      }
+    });
+
+    function navigateTo(page) {
+      dashboard.style.opacity = "0";
+      setTimeout(() => { window.location.href = page; }, 400);
+    }
+
+    function revealCards() {
+      const cards = document.querySelectorAll(".portal-card");
+      const windowHeight = window.innerHeight;
+      cards.forEach((card, i) => {
+        const position = card.getBoundingClientRect().top;
+        if (position < windowHeight - 100) {
+          setTimeout(() => card.classList.add("visible"), i * 150);
+        }
+      });
+    }
+
+    window.addEventListener("scroll", revealCards);
+    window.addEventListener("load", revealCards);
+
+    logoutBtn.addEventListener("click", () => {
+      dashboard.style.display = "none";
+      loginContainer.style.display = "block";
+    });
+  </script>
+</body>
+</html>

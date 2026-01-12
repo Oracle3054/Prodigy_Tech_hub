@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Messages | Prodigy Tech Hub</title>
+  <link rel="stylesheet" href="css/global.css" />
+  <style>
+    body {
+      background: #f4f6fb;
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+    }
+
+    /* -------- HEADER -------- */
+    header.site-header {
+      background: #007bff;
+      color: #fff;
+      padding: 15px 0;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    header .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-decoration: none;
+      color: #fff;
+    }
+    header nav a {
+      color: #fff;
+      margin: 0 10px;
+      text-decoration: none;
+      transition: opacity 0.3s;
+    }
+    header nav a:hover {
+      opacity: 0.7;
+    }
+
+    /* -------- LAYOUT -------- */
+    .messages-container {
+      max-width: 1200px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 16px;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    /* -------- SIDEBAR -------- */
+    .sidebar {
+      background: #007bff;
+      color: #fff;
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar h2 {
+      font-size: 1.6rem;
+      margin-bottom: 20px;
+    }
+    .search-box {
+      margin-bottom: 20px;
+    }
+    .search-box input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      outline: none;
+    }
+    .chat-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      flex: 1;
+      overflow-y: auto;
+    }
+    .chat-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.1);
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .chat-list li:hover, .chat-list li.active {
+      background: rgba(255,255,255,0.25);
+    }
+    .chat-list img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #fff;
+    }
+    .chat-info {
+      flex: 1;
+    }
+    .chat-info strong {
+      display: block;
+      font-size: 1rem;
+    }
+    .chat-info small {
+      font-size: 0.8rem;
+      opacity: 0.8;
+    }
+    .unread {
+      background: #fff;
+      color: #007bff;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    /* -------- CHAT AREA -------- */
+    .chat-area {
+      padding: 25px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .chat-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+    .chat-header img {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: 2px solid #007bff;
+    }
+    .chat-header h3 {
+      margin: 0;
+    }
+
+    .messages {
+      flex: 1;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .msg {
+      max-width: 70%;
+      padding: 12px 16px;
+      border-radius: 18px;
+      line-height: 1.5;
+      position: relative;
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .msg.sent {
+      background: #007bff;
+      color: #fff;
+      align-self: flex-end;
+    }
+    .msg.received {
+      background: #f0f0f0;
+      color: #333;
+      align-self: flex-start;
+    }
+    .msg small {
+      display: block;
+      font-size: 0.7rem;
+      opacity: 0.7;
+      margin-top: 4px;
+    }
+
+    /* -------- INPUT -------- */
+    .chat-input {
+      display: flex;
+      gap: 10px;
+    }
+    .chat-input input {
+      flex: 1;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      outline: none;
+    }
+    .chat-input button {
+      background: #007bff;
+      border: none;
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .chat-input button:hover {
+      background: #005fd1;
+    }
+
+    @media(max-width: 768px) {
+      .messages-container { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">Prodigy Tech Hub</a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="project.html">Projects</a>
+        <a href="messages.html" class="active">Messages</a>
+        <a href="settings.html">Settings</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="messages-container">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <h2>Messages</h2>
+      <div class="search-box">
+        <input type="text" placeholder="Search chats..." oninput="filterChats(this.value)">
+      </div>
+      <ul class="chat-list" id="chatList">
+        <li class="active" onclick="selectChat('Oracle Mentor')">
+          <img src="https://i.pravatar.cc/50?img=12" alt="Oracle Mentor">
+          <div class="chat-info">
+            <strong>Oracle Mentor</strong>
+            <small>Let’s review your project today</small>
+          </div>
+          <span class="unread">2</span>
+        </li>
+        <li onclick="selectChat('Faith Ugo')">
+          <img src="https://i.pravatar.cc/50?img=5" alt="Faith Ugo">
+          <div class="chat-info">
+            <strong>Faith Ugo</strong>
+            <small>Thanks, I’ll update soon!</small>
+          </div>
+        </li>
+        <li onclick="selectChat('Mary Johnson')">
+          <img src="https://i.pravatar.cc/50?img=7" alt="Mary Johnson">
+          <div class="chat-info">
+            <strong>Mary Johnson</strong>
+            <small>Are we meeting tomorrow?</small>
+          </div>
+        </li>
+        <li onclick="selectChat('Daniel Adedayo')">
+          <img src="https://i.pravatar.cc/50?img=15" alt="Daniel Adedayo">
+          <div class="chat-info">
+            <strong>Daniel Adedayo</strong>
+            <small>Yes sir, I fixed the bug ✅</small>
+          </div>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- CHAT AREA -->
+    <section class="chat-area">
+      <div class="chat-header">
+        <img src="https://i.pravatar.cc/50?img=12" alt="Chat user" id="chatAvatar">
+        <h3 id="chatName">Oracle Mentor</h3>
+      </div>
+
+      <div class="messages" id="chatBox">
+        <div class="msg received">Hi there 👋, how’s your project going?</div>
+        <div class="msg sent">Hey! It’s progressing well, I just finished the dashboard layout.</div>
+      </div>
+
+      <div class="chat-input">
+        <input type="text" id="chatInput" placeholder="Type a message..." onkeydown="if(event.key==='Enter') sendMsg()">
+        <button onclick="sendMsg()">Send</button>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const chatBox = document.getElementById('chatBox');
+    const chatInput = document.getElementById('chatInput');
+    const chatName = document.getElementById('chatName');
+    const chatAvatar = document.getElementById('chatAvatar');
+    const chatList = document.getElementById('chatList');
+
+    function sendMsg() {
+      const text = chatInput.value.trim();
+      if (!text) return;
+
+      // Create user message
+      const msg = document.createElement('div');
+      msg.classList.add('msg', 'sent');
+      msg.innerHTML = `${text}<small>${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</small>`;
+      chatBox.appendChild(msg);
+
+      chatInput.value = '';
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      // Fake "live" reply
+      setTimeout(() => {
+        const reply = document.createElement('div');
+        reply.classList.add('msg', 'received');
+        const responses = [
+          "Nice work 👍",
+          "Keep pushing!",
+          "I’ll check it and get back.",
+          "Looks great!",
+          "Good progress, keep it up 💪"
+        ];
+        reply.innerHTML = `${responses[Math.floor(Math.random()*responses.length)]}<small>${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</small>`;
+        chatBox.appendChild(reply);
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }, 1000);
+    }
+
+    function selectChat(name) {
+      [...chatList.children].forEach(li => li.classList.remove('active'));
+      event.currentTarget.classList.add('active');
+      chatName.textContent = name;
+      chatAvatar.src = event.currentTarget.querySelector('img').src;
+      chatBox.innerHTML = `<div class="msg received">Hey ${name.split(" ")[0]} 👋, let’s continue from where we stopped.</div>`;
+    }
+
+    function filterChats(value) {
+      [...chatList.children].forEach(li => {
+        li.style.display = li.textContent.toLowerCase().includes(value.toLowerCase()) ? '' : 'none';
+      });
+    }
+  </script>
+</body>
+</html>

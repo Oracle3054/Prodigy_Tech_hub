@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Admission — Prodigy Tech Hub</title>
+  <style>
+    :root {
+      --primary:#2563eb;
+      --accent:#60a5fa;
+      --bg:#f8fafc;
+      --card:#fff;
+      --text:#0f172a;
+      --muted:#64748b;
+      --radius:14px;
+    }
+    * { box-sizing:border-box; }
+    body {
+      margin:0;
+      font-family: "Inter", system-ui, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+
+    header {
+      background:var(--primary);
+      color:#fff;
+      padding:1rem 2rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      position:sticky;
+      top:0;
+      z-index:100;
+      box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    }
+    .logo {
+      font-size:1.3rem;
+      font-weight:800;
+      text-decoration:none;
+      color:#fff;
+    }
+    nav a {
+      color:#fff;
+      text-decoration:none;
+      margin-left:1.5rem;
+      font-weight:500;
+      transition:opacity .3s;
+    }
+    nav a:hover { opacity:0.7; }
+
+    main {
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:calc(100vh - 80px);
+      padding:2rem;
+      animation:fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from{opacity:0; transform:translateY(30px);}
+      to{opacity:1; transform:none;}
+    }
+
+    .card {
+      background:var(--card);
+      width:100%;
+      max-width:600px;
+      border-radius:var(--radius);
+      box-shadow:0 12px 35px rgba(15,23,42,0.08);
+      padding:2rem 2.5rem;
+      transition:transform .3s, box-shadow .3s;
+    }
+    .card:hover {
+      transform:translateY(-5px);
+      box-shadow:0 20px 45px rgba(37,99,235,0.15);
+    }
+
+    h1 {
+      text-align:center;
+      color:var(--primary);
+      font-size:1.8rem;
+      margin-bottom:.5rem;
+    }
+    p.lead {
+      text-align:center;
+      color:var(--muted);
+      margin-bottom:2rem;
+      font-size:.95rem;
+    }
+
+    form {
+      display:flex;
+      flex-direction:column;
+      gap:1rem;
+    }
+    label {
+      font-size:.9rem;
+      color:var(--muted);
+      font-weight:600;
+    }
+    input, select, textarea {
+      width:100%;
+      padding:.75rem 1rem;
+      border:1px solid rgba(0,0,0,0.1);
+      border-radius:8px;
+      font-size:.95rem;
+      transition:border .3s, box-shadow .3s;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color:var(--accent);
+      box-shadow:0 0 0 3px rgba(96,165,250,0.25);
+      outline:none;
+    }
+
+    button {
+      background:var(--primary);
+      color:#fff;
+      border:none;
+      border-radius:8px;
+      padding:.9rem;
+      font-weight:700;
+      font-size:1rem;
+      cursor:pointer;
+      transition:all .3s;
+    }
+    button:hover {
+      background:#1e40af;
+      transform:translateY(-2px);
+    }
+
+    #msg {
+      margin-top:1rem;
+      text-align:center;
+      font-weight:600;
+    }
+
+    footer {
+      text-align:center;
+      padding:1.5rem;
+      color:var(--muted);
+      font-size:.85rem;
+      background:#f1f5f9;
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" class="logo">Prodigy Tech Hub</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="courses.html">Courses</a>
+      <a href="portal.html">Portal</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="card">
+      <h1>🎓 Admission Form</h1>
+      <p class="lead">Fill in your details carefully to begin your journey at Prodigy Tech Hub.</p>
+
+      <form id="admissionForm">
+        <div>
+          <label>Full Name</label>
+          <input type="text" id="name" placeholder="Enter your full name" required />
+        </div>
+        <div>
+          <label>Email Address</label>
+          <input type="email" id="email" placeholder="Enter your email" required />
+        </div>
+        <div>
+          <label>Phone Number</label>
+          <input type="tel" id="phone" placeholder="Enter your phone number" required />
+        </div>
+        <div>
+          <label>Preferred Course</label>
+          <select id="course" required>
+            <option value="">Select a course</option>
+            <option>Frontend Development</option>
+            <option>Backend Development</option>
+            <option>UI/UX Design</option>
+            <option>Data Science</option>
+            <option>Cybersecurity</option>
+            <option>Cloud Computing</option>
+            <option>Artificial Intelligence</option>
+            <option>Mobile App Development</option>
+          </select>
+        </div>
+        <div>
+          <label>Why do you want to join Prodigy Tech Hub?</label>
+          <textarea id="reason" rows="4" placeholder="Write a short motivation" required></textarea>
+        </div>
+
+        <button type="submit">Submit Application</button>
+      </form>
+
+      <p id="msg"></p>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 Prodigy Tech Hub. All Rights Reserved.
+  </footer>
+
+  <script>
+    const form = document.getElementById("admissionForm");
+    const msg = document.getElementById("msg");
+
+    console.log("%c🎓 Admission Page Loaded Successfully", "color:#2563eb;font-weight:bold;");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const course = document.getElementById("course").value;
+      const reason = document.getElementById("reason").value.trim();
+
+      console.log("📝 Form Submission Attempt Detected");
+      console.log(`👤 Name: ${name}`);
+      console.log(`📧 Email: ${email}`);
+      console.log(`📱 Phone: ${phone}`);
+      console.log(`💻 Course: ${course}`);
+
+      if (!name || !email || !phone || !course || !reason) {
+        msg.textContent = "⚠️ Please fill in all required fields.";
+        msg.style.color = "red";
+        console.warn("⚠️ Form validation failed — missing information.");
+        return;
+      }
+
+      msg.textContent = "✅ Application submitted successfully! We'll get back to you soon.";
+      msg.style.color = "green";
+      console.log("✅ Admission form successfully submitted!");
+      console.log("📡 Sending form data to admin server... (simulation)");
+
+      // Reset after delay
+      setTimeout(() => {
+        form.reset();
+        msg.textContent = "";
+      }, 4000);
+    });
+  </script>
+</body>
+</html>

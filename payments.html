@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payments | Prodigy Tech Hub Nigeria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #2563eb;
+      --secondary: #1e40af;
+      --success: #16a34a;
+      --bg: #f1f5f9;
+      --white: #fff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --radius: 14px;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{
+      font-family:'Poppins',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+
+    header{
+      background:var(--white);
+      padding:1.2rem 3rem;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      box-shadow:0 2px 8px rgba(0,0,0,0.05);
+      position:sticky;top:0;z-index:10;
+    }
+    header h1{color:var(--primary);font-size:1.5rem;font-weight:700;}
+    nav a{
+      text-decoration:none;color:var(--muted);
+      font-weight:500;margin-left:1.5rem;transition:.3s;
+    }
+    nav a:hover,nav a.active{color:var(--primary);}
+
+    .hero{
+      text-align:center;
+      padding:3rem 1.5rem;
+      background:linear-gradient(135deg,#e0f2fe 0%,#ffffff 100%);
+    }
+    .hero h2{font-size:2.1rem;margin-bottom:.5rem;color:#0f172a;}
+    .hero p{color:var(--muted);max-width:650px;margin:0 auto;}
+
+    .section{
+      max-width:1000px;margin:3rem auto;
+      background:var(--white);
+      border-radius:var(--radius);
+      box-shadow:0 8px 25px rgba(0,0,0,0.05);
+      overflow:hidden;
+      animation:fadeIn .8s ease;
+      padding:2rem;
+    }
+    @keyframes fadeIn{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+
+    h3.section-title{
+      color:var(--primary);
+      margin-bottom:1rem;
+      border-left:5px solid var(--primary);
+      padding-left:.8rem;
+      font-size:1.3rem;
+    }
+
+    .account-details{
+      background:#f9fafb;
+      border:1px solid #e2e8f0;
+      border-radius:var(--radius);
+      padding:1.5rem;
+      line-height:1.8;
+      font-size:0.95rem;
+    }
+    .account-details strong{color:var(--text);}
+    .account-details span{color:var(--muted);display:block;}
+
+    .methods{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+      gap:1.5rem;
+      margin-top:1.5rem;
+    }
+    .method-card{
+      border:1px solid #e5e7eb;
+      border-radius:var(--radius);
+      padding:1.5rem;
+      background:#f8fafc;
+      transition:all .3s;
+    }
+    .method-card:hover{
+      background:#e0f2fe;
+      transform:translateY(-4px);
+    }
+    .method-card h4{
+      color:var(--secondary);
+      margin-bottom:.5rem;
+    }
+    .method-card p{color:var(--muted);font-size:0.95rem;}
+
+    table{width:100%;border-collapse:collapse;margin-top:1.5rem;font-size:0.95rem;}
+    th,td{padding:1rem 1rem;text-align:left;border-bottom:1px solid #f1f5f9;}
+    th{background:#f9fafb;color:#1e3a8a;font-weight:600;}
+    td{color:var(--muted);}
+    tr:hover td{background:#f8fafc;}
+    .status{padding:0.35rem 0.8rem;border-radius:6px;font-weight:500;font-size:0.85rem;}
+    .paid{background:#dcfce7;color:#166534;}
+    .pending{background:#fff4e5;color:#b45309;}
+
+    .pay-btn{
+      background:var(--primary);color:#fff;border:none;
+      padding:.7rem 1.4rem;border-radius:10px;
+      font-weight:600;cursor:pointer;margin-top:1rem;
+      transition:.3s;
+    }
+    .pay-btn:hover{background:var(--secondary);}
+
+    footer{
+      text-align:center;padding:2rem;color:var(--muted);
+      font-size:.9rem;background:#fafafa;border-top:1px solid #e5e7eb;margin-top:3rem;
+    }
+
+    .modal{
+      position:fixed;inset:0;background:rgba(0,0,0,0.4);
+      display:flex;align-items:center;justify-content:center;
+      visibility:hidden;opacity:0;transition:.4s;
+    }
+    .modal.active{visibility:visible;opacity:1;}
+    .modal-content{
+      background:#fff;border-radius:var(--radius);
+      padding:2rem;width:90%;max-width:400px;text-align:center;
+      box-shadow:0 8px 25px rgba(0,0,0,0.2);
+      transform:translateY(40px);transition:.4s;
+    }
+    .modal.active .modal-content{transform:translateY(0);}
+    .modal-content h4{color:var(--primary);margin-bottom:1rem;}
+    .modal-content input{
+      width:100%;padding:0.7rem;margin-bottom:1rem;
+      border-radius:8px;border:1px solid #e5e7eb;outline:none;
+    }
+    .modal-content button{
+      width:100%;padding:0.7rem;border:none;border-radius:8px;
+      font-weight:600;background:var(--primary);color:#fff;cursor:pointer;transition:.3s;
+    }
+    .modal-content button:hover{background:var(--secondary);}
+    .close{display:inline-block;margin-top:1rem;color:#64748b;cursor:pointer;}
+    .close:hover{text-decoration:underline;}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Prodigy Tech Hub</h1>
+    <nav>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="courses.html">Courses</a>
+      <a href="registration.html">Register</a>
+      <a href="payments.html" class="active">Payments</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Payments & Billing (Nigeria)</h2>
+    <p>Make payments easily via Bank Transfer, Card, or USSD. Track all transactions below.</p>
+  </section>
+
+  <section class="section">
+    <h3 class="section-title">School Account Details</h3>
+    <div class="account-details">
+      <strong>Bank Name:</strong> Access Bank PLC <br>
+      <strong>Account Name:</strong> Prodigy Tech Hub Nigeria <br>
+      <strong>Account Number:</strong> <span>0745673821</span>
+      <span>⚠️ Kindly ensure your full name appears as the payment narration.</span>
+      <span>After payment, upload your receipt or payment confirmation in your student dashboard.</span>
+    </div>
+
+    <h3 class="section-title" style="margin-top:2rem;">Payment Options</h3>
+    <div class="methods">
+      <div class="method-card">
+        <h4>💳 Pay by Card</h4>
+        <p>Make secure online payments using Visa, MasterCard, or Verve. Click below to initiate card payment.</p>
+        <button class="pay-btn" id="openModal">Pay Now</button>
+      </div>
+      <div class="method-card">
+        <h4>🏦 Bank Transfer</h4>
+        <p>Transfer directly to the official school account listed above. After payment, upload your proof for confirmation.</p>
+      </div>
+      <div class="method-card">
+        <h4>💰 USSD / Mobile Banking</h4>
+        <p>Use your bank's USSD code to transfer the course fee. For example: <strong>*901*2*AccountNo*Amount#</strong> for Access Bank.</p>
+      </div>
+    </div>
+
+    <h3 class="section-title" style="margin-top:2rem;">Transaction History</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Date</th><th>Reference</th><th>Description</th><th>Amount</th><th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Oct 25, 2025</td><td>#PTN-251025A</td>
+          <td>Web Development Course</td><td>₦150,000</td>
+          <td><span class="status paid">Paid</span></td>
+        </tr>
+        <tr>
+          <td>Nov 5, 2025</td><td>#PTN-251105B</td>
+          <td>Monthly Tuition (Installment)</td><td>₦50,000</td>
+          <td><span class="status pending">Pending</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <div class="modal" id="paymentModal">
+    <div class="modal-content">
+      <h4>Make a Payment</h4>
+      <input type="number" placeholder="Enter Amount (₦)" />
+      <input type="text" placeholder="Card Number" />
+      <input type="text" placeholder="Cardholder Name" />
+      <button id="confirmPayBtn">Proceed</button>
+      <span class="close" id="closeModal">Cancel</span>
+    </div>
+  </div>
+
+  <footer>© 2025 Prodigy Tech Hub Nigeria. All Rights Reserved.</footer>
+
+  <script>
+    const modal=document.getElementById("paymentModal");
+    const openModal=document.getElementById("openModal");
+    const closeModal=document.getElementById("closeModal");
+    const confirmBtn=document.getElementById("confirmPayBtn");
+
+    openModal.addEventListener("click",()=>modal.classList.add("active"));
+    closeModal.addEventListener("click",()=>modal.classList.remove("active"));
+
+    confirmBtn.addEventListener("click",()=>{
+      confirmBtn.textContent="Processing...";
+      confirmBtn.disabled=true;
+      setTimeout(()=>{
+        confirmBtn.textContent="Payment Successful!";
+        confirmBtn.style.background="#16a34a";
+      },1500);
+      setTimeout(()=>{
+        modal.classList.remove("active");
+        confirmBtn.textContent="Proceed";
+        confirmBtn.style.background="";
+        confirmBtn.disabled=false;
+      },3000);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Admin — Live Payments</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;margin:24px;background:#f3f7ff;color:#0b1220}
+    .wrap{max-width:1000px;margin:0 auto}
+    h2{color:#2563eb}
+    table{width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 8px 30px rgba(10,20,40,.06)}
+    th,td{padding:12px;border-bottom:1px solid #f1f5f9;text-align:left}
+    th{background:#f8fbff;color:#1e3a8a}
+    .tag{padding:6px 8px;border-radius:999px;font-weight:700}
+    .paid{background:#dcfce7;color:#166534}
+    .pending{background:#fff4e5;color:#92400e}
+    #log{margin-top:12px;color:#64748b}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h2>Prodigy Tech Hub — Live Payments (Admin)</h2>
+    <table id="paymentsTable">
+      <thead>
+        <tr><th>Time</th><th>Ref</th><th>Student</th><th>Course</th><th>Amount</th><th>Status</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <div id="log">Waiting for payments...</div>
+  </div>
+
+  <!-- Socket.io client -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+
+    function addRow(payment){
+      const tbody = document.querySelector('#paymentsTable tbody');
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${new Date(payment.time).toLocaleString()}</td>
+                      <td>${payment.reference}</td>
+                      <td>${payment.student_name} (${payment.email || ''})</td>
+                      <td>${payment.course}</td>
+                      <td>₦${Number(payment.amount).toLocaleString()}</td>
+                      <td><span class="tag ${payment.status==='success'?'paid':'pending'}">${payment.status}</span></td>`;
+      tbody.insertBefore(tr, tbody.firstChild);
+      document.getElementById('log').textContent = 'Last update: ' + new Date().toLocaleString();
+    }
+
+    // On connect, optionally request latest payments
+    socket.on('connect', () => {
+      console.log('Connected to server socket');
+      socket.emit('admin_ready');
+    });
+
+    // When server emits a new payment
+    socket.on('new_payment', (data) => {
+      console.log('new_payment', data);
+      addRow(data);
+      // Optionally show browser notification (ask user permission)
+      if(Notification.permission === 'granted'){
+        new Notification('New payment', {body: `${data.student_name} paid ₦${data.amount}`});
+      } else {
+        if(Notification.permission !== 'denied') Notification.requestPermission();
+      }
+    });
+
+    // Optionally receive bulk initial state
+    socket.on('initial_payments', (list) => {
+      list.forEach(addRow);
+    });
+  </script>
+</body>
+</html>

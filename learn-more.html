@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learn More | Prodigy Tech Hub</title>
+  <link rel="stylesheet" href="Resources/Styles/global.css" />
+  <style>
+    /* ===== GENERAL STYLES ===== */
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: #ffffff;
+      color: #222;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #ffffff;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #e5e7eb;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+      color: #007bff;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    header nav a {
+      color: #333;
+      margin-left: 1.5rem;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    header nav a:hover {
+      color: #007bff;
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero {
+      text-align: center;
+      padding: 4rem 1rem;
+      background: linear-gradient(to right, #f8fafc, #eef2ff);
+      animation: fadeIn 1.2s ease forwards;
+    }
+
+    .hero h2 {
+      font-size: 2.5rem;
+      color: #007bff;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      max-width: 720px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    /* ===== MAIN CONTENT CARDS ===== */
+    .sections {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      padding: 4rem 2rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 1rem;
+      padding: 2rem;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #f0f0f0;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 25px rgba(0, 123, 255, 0.15);
+    }
+
+    .card h3 {
+      color: #007bff;
+      margin-bottom: 0.75rem;
+      font-size: 1.3rem;
+    }
+
+    .card p {
+      color: #555;
+      line-height: 1.7;
+      font-size: 1rem;
+    }
+
+    .read-more {
+      display: inline-block;
+      margin-top: 1rem;
+      color: #007bff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .read-more:hover {
+      color: #0056b3;
+      text-decoration: underline;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #f9fafb;
+      color: #555;
+      font-size: 0.95rem;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      header nav {
+        margin-top: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <a href="index.html" class="logo">Prodigy Tech Hub</a>
+    <nav>
+      <a href="#training">Software Training</a>
+      <a href="#data">Big Data</a>
+      <a href="#education">Education</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Learn More</h2>
+    <p>
+      Explore how <strong>Prodigy Tech Hub</strong> empowers learners and organizations through 
+      <strong>Software Training</strong>, <strong>Big Data Analysis</strong>, and 
+      <strong>Educational Training</strong>. We bridge innovation and education to make learning smart, flexible, and result-driven.
+    </p>
+  </section>
+
+  <section class="sections">
+  <div class="card reveal" id="training">
+    <h3>Software Training</h3>
+    <p>
+      Our Software Training program equips learners with real-world development skills. From mastering front-end and back-end frameworks to understanding modern deployment tools, you’ll gain hands-on experience to build practical solutions and scale your tech career.
+    </p>
+    <a href="training.html" class="read-more">Explore &rarr;</a>
+  </div>
+
+  <div class="card reveal" id="data">
+    <h3>Big Data Analysis</h3>
+    <p>
+      Unlock the power of data with our Big Data Analysis course. Learn to manage, visualize, and interpret massive data sets using advanced analytics and AI-driven tools. Gain the skills that businesses rely on to make informed, data-driven decisions.
+    </p>
+    <a href="#data" class="read-more">Explore &rarr;</a>
+  </div>
+
+  <div class="card reveal" id="education">
+    <h3>Educational Training</h3>
+    <p>
+      Transform how you teach and learn through our Educational Training platform. Conduct live sessions, assign tasks, monitor progress, and deliver interactive lessons — all designed to enhance knowledge retention and student engagement.
+    </p>
+    <a href="#education" class="read-more">Explore &rarr;</a>
+  </div>
+</section>
+
+<style>
+  /* =============== BASE STYLING =============== */
+  .sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    padding: 5rem 2rem;
+    background: #ffffff;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+    transition: all 0.5s ease;
+    position: relative;
+    overflow: hidden;
+    transform: translateY(50px);
+    opacity: 0;
+  }
+
+  /* Subtle gradient overlay on hover */
+  .card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(37,99,235,0.05), rgba(255,255,255,0.1));
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    border-radius: 20px;
+  }
+
+  /* Hover animation - mature and soft */
+  .card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(37, 99, 235, 0.12);
+  }
+
+  .card:hover::before {
+    opacity: 1;
+  }
+
+  .card h3 {
+    font-size: 1.5rem;
+    color: #1e3a8a;
+    margin-bottom: 1rem;
+    transition: color 0.3s ease;
+  }
+
+  .card p {
+    font-size: 1rem;
+    color: #4b5563;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .card:hover h3 {
+    color: #2563eb;
+  }
+
+  .read-more {
+    text-decoration: none;
+    font-weight: 600;
+    color: #2563eb;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  /* Arrow slide effect */
+  .read-more::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: #2563eb;
+    transition: width 0.3s ease;
+  }
+
+  .read-more:hover::after {
+    width: 100%;
+  }
+
+  .read-more:hover {
+    color: #1d4ed8;
+    transform: translateX(3px);
+  }
+
+  /* Scroll reveal animation */
+  .visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Smooth fade + slide */
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+<script>
+  // ===== Scroll Reveal Animation =====
+  const reveals = document.querySelectorAll(".reveal");
+
+  function revealOnScroll() {
+    const windowHeight = window.innerHeight;
+    reveals.forEach((el, i) => {
+      const elementTop = el.getBoundingClientRect().top;
+      if (elementTop < windowHeight - 100) {
+        el.classList.add("visible");
+        el.style.animation = `fadeUp 1s ease ${i * 0.2}s forwards`;
+      }
+    });
+  }
+
+  window.addEventListener("scroll", revealOnScroll);
+  window.addEventListener("load", revealOnScroll);
+</script>
+
+  <footer>
+    &copy; 2025 Prodigy Tech Hub. All rights reserved.
+  </footer>
+
+  <script>
+    // Scroll Reveal Animation
+    function revealElements() {
+      const reveals = document.querySelectorAll(".reveal");
+      for (let i = 0; i < reveals.length; i++) {
+        const windowHeight = window.innerHeight;
+        const elementTop = reveals[i].getBoundingClientRect().top;
+        const elementVisible = 150;
+
+        if (elementTop < windowHeight - elementVisible) {
+          reveals[i].classList.add("active");
+        } else {
+          reveals[i].classList.remove("active");
+        }
+      }
+    }
+
+    window.addEventListener("scroll", revealElements);
+    revealElements();
+  </script>
+</body>
+</html>

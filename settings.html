@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings | Prodigy Tech Hub</title>
+  <link rel="stylesheet" href="css/global.css" />
+  <style>
+    :root {
+      --primary: #007bff;
+      --bg: #f8f9fb;
+      --card: #fff;
+      --text: #333;
+    }
+    [data-theme="dark"] {
+      --primary: #00b4ff;
+      --bg: #0f172a;
+      --card: #1e293b;
+      --text: #f8fafc;
+    }
+
+    body {
+      background: var(--bg);
+      font-family: "Poppins", sans-serif;
+      color: var(--text);
+      transition: background 0.3s, color 0.3s;
+      margin: 0;
+    }
+
+    /* HEADER */
+    header.site-header {
+      background: var(--primary);
+      color: #fff;
+      padding: 15px 0;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    header .logo {
+      font-size: 1.5rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: #fff;
+    }
+    header nav a {
+      color: #fff;
+      margin: 0 12px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: opacity 0.3s;
+    }
+    header nav a:hover { opacity: 0.7; }
+
+    /* SETTINGS CONTAINER */
+    .settings-container {
+      max-width: 900px;
+      margin: 100px auto;
+      background: var(--card);
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+      transition: background 0.3s;
+    }
+
+    h1 {
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 2rem;
+    }
+
+    .profile-pic {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin-bottom: 30px;
+    }
+    .profile-pic img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--primary);
+      margin-bottom: 10px;
+      transition: transform 0.3s;
+    }
+    .profile-pic img:hover {
+      transform: scale(1.05);
+    }
+    .profile-pic input {
+      display: none;
+    }
+    .upload-btn {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.3s;
+    }
+    .upload-btn:hover { background: #005dc5; }
+
+    .settings-section {
+      margin-bottom: 40px;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      padding-bottom: 25px;
+    }
+    .settings-section h2 {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      color: var(--primary);
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    input, select {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .save-btn {
+      display: block;
+      margin: 0 auto;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    .save-btn:hover {
+      background: #005dc5;
+      transform: translateY(-2px);
+    }
+    .save-msg {
+      text-align: center;
+      margin-top: 20px;
+      font-weight: 500;
+      color: var(--primary);
+    }
+  </style>
+</head>
+<body data-theme="light">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">Prodigy Tech Hub</a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="project.html">Projects</a>
+        <a href="messages.html">Messages</a>
+        <a href="settings.html" class="active">Settings</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="settings-container">
+    <h1>Account Settings</h1>
+
+    <div class="profile-pic">
+      <img id="profilePreview" src="https://i.pravatar.cc/150?img=3" alt="Profile Picture" />
+      <label for="upload" class="upload-btn">Upload New Photo</label>
+      <input type="file" id="upload" accept="image/*" onchange="previewPhoto(event)" />
+    </div>
+
+    <div class="settings-section">
+      <h2>Profile Information</h2>
+      <label>Full Name</label>
+      <input type="text" id="name" placeholder="Your name" />
+      <label>Email</label>
+      <input type="email" id="email" placeholder="Your email" />
+      <label>Change Password</label>
+      <input type="password" id="password" placeholder="New password" />
+    </div>
+
+    <div class="settings-section">
+      <h2>Preferences</h2>
+      <label>Theme</label>
+      <select id="theme" onchange="toggleTheme(this.value)">
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+      </select>
+      <label>Notifications</label>
+      <select id="notifications">
+        <option value="enabled">Enabled</option>
+        <option value="disabled">Disabled</option>
+      </select>
+    </div>
+
+    <div class="settings-section">
+      <h2>Security</h2>
+      <label>Two-Factor Authentication</label>
+      <select id="2fa">
+        <option value="off">Off</option>
+        <option value="on">On</option>
+      </select>
+    </div>
+
+    <button class="save-btn" onclick="saveSettings()">Save Changes</button>
+    <p class="save-msg" id="saveMsg"></p>
+  </main>
+
+  <script>
+    const body = document.body;
+
+    // Load saved settings
+    window.onload = () => {
+      const savedTheme = localStorage.getItem("theme") || "light";
+      const savedName = localStorage.getItem("name") || "";
+      const savedEmail = localStorage.getItem("email") || "";
+      const savedNotifications = localStorage.getItem("notifications") || "enabled";
+      const saved2FA = localStorage.getItem("2fa") || "off";
+      const savedPic = localStorage.getItem("profilePic");
+
+      document.getElementById("theme").value = savedTheme;
+      document.getElementById("name").value = savedName;
+      document.getElementById("email").value = savedEmail;
+      document.getElementById("notifications").value = savedNotifications;
+      document.getElementById("2fa").value = saved2FA;
+      if (savedPic) document.getElementById("profilePreview").src = savedPic;
+
+      toggleTheme(savedTheme);
+    };
+
+    // Theme toggle
+    function toggleTheme(theme) {
+      body.setAttribute("data-theme", theme);
+      localStorage.setItem("theme", theme);
+    }
+
+    // Profile picture preview
+    function previewPhoto(event) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        document.getElementById("profilePreview").src = reader.result;
+        localStorage.setItem("profilePic", reader.result);
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+
+    // Save settings
+    function saveSettings() {
+      localStorage.setItem("name", document.getElementById("name").value);
+      localStorage.setItem("email", document.getElementById("email").value);
+      localStorage.setItem("notifications", document.getElementById("notifications").value);
+      localStorage.setItem("2fa", document.getElementById("2fa").value);
+
+      const saveMsg = document.getElementById("saveMsg");
+      saveMsg.textContent = "✅ Settings saved successfully!";
+      setTimeout(() => saveMsg.textContent = "", 4000);
+    }
+  </script>
+</body>
+</html>

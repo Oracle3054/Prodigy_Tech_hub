@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Prodigy Tech Hub — Learn • Build • Launch</title>
+  <meta name="description" content="Prodigy Tech Hub — hands-on training, industry projects, and career support." />
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="Resources/assets/icon_logo/icon.jpeg " />
+  <link rel="stylesheet" href="Resources/css/global.css" />
+
+
+
+</head>
+<body>
+ <!-- Accessible skip link -->
+<a class="visually-hidden" href="#main">Skip to content</a>
+
+<!-- ===== HEADER START ===== -->
+<header class="site-header">
+  <div class="container header-inner">
+    <!-- Logo & Brand -->
+<a class="brand" href="index.html" aria-label="Prodigy Tech Hub Home">
+  <div class="logo-wrap">
+    <img 
+      src="Resources/assets/icon_logo/prodigytechhub-web-logo.webp" 
+      alt="Prodigy Tech Hub Logo" 
+      class="logo-img" 
+      loading="lazy" 
+    />
+    <div class="logo-text">
+      <p a class="tagline" >Learn • Build • Launch</p>
+    </div>
+  </div>
+</a>
+
+    <!-- Primary Navigation -->
+    <nav class="nav primary" aria-label="Primary navigation">
+      <a href="#about" class="nav-link">About</a>
+      <a href="courses.html" class="nav-link">Courses</a>
+      <a href="#how" class="nav-link">How it Works</a>
+      <a href="#instructors" class="nav-link">Instructors</a>
+      <a href="blog.html" class="nav-link">Blog</a>
+    </nav>
+
+    <!-- Header Actions -->
+    <div class="header-actions">
+      <button class="btn btn-ghost" id="portalBtn">Portal</button>
+
+<script>
+  document.getElementById('portalBtn').addEventListener('click', () => {
+    window.location.href = 'portal.html';
+  });
+</script>
+
+      <a class="btn btn-primary" href="#apply">Apply</a>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ===== MOBILE NAVIGATION ===== -->
+  <nav id="mobileNav" class="mobile-nav" aria-label="Mobile navigation">
+    <a class="brand" href="index.html" aria-label="Prodigy Tech Hub Home">
+      <div class="logo-wrap">
+        <span class="logo-mark">P</span>
+        <div class="logo-text">
+          <h1>Prodigy Tech Hub</h1>
+          <p class="tagline">Learn • Build • Launch</p>
+        </div>
+      </div>
+    <a href="#about" class="nav-link">About</a>
+    <a href="#courses" class="nav-link">Courses</a>
+    <a href="#how" class="nav-link">How it Works</a>
+    <a href="#instructors" class="nav-link">Instructors</a>
+    <a href="blog.html" class="nav-link">Blog</a>
+    <a href="#contact" class="nav-link">Contact</a>
+  </nav>
+</header>
+<!-- ===== HEADER END ===== -->
+
+<main id="main">
+  <section id="home" class="hero">
+    <!-- Background Slider -->
+    <div class="hero-bg">
+      <div class="slide active" style="background-image: url('Resources/assets/impo/st.jpeg');"></div>
+      <div class="slide" style="background-image: url('Resources/assets/impo/da.jpeg');"></div>
+      <div class="slide" style="background-image: url('Resources/assets/impo/et.jpeg');"></div>
+      <div class="overlay"></div>
+    </div>
+
+    <div class="wrap hero-grid">
+      <div class="hero-content">
+        <span class="eyebrow pulse">Admissions Open</span>
+        <h2 class="hero-title" id="hero-title">Training Software</h2>
+        <p class="lead" id="hero-text">
+          Our Training Software is designed to transform the way individuals and teams learn. It combines interactive lessons, real-time assessments, and progress tracking to make training simple, engaging, and effective With our platform, instructors can easily create and manage courses, upload materials, schedule live sessions, and monitor learner performance all from one central dashboard.
+
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#courses">View Courses</a>
+          <a class="btn btn-ghost" href="#about">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  const slides = document.querySelectorAll(".slide");
+  const title = document.getElementById("hero-title");
+  const text = document.getElementById("hero-text");
+
+  const content = [
+    {
+      title: "Training Software",
+      text: "Transform your curiosity into skills that matter. Master coding, software, and digital tools that open doors to remote jobs, flexible work, and unstoppable career growth."
+    },
+    {
+      title: "Big Data Analysis ",
+      text: ""
+    {
+      title: "Educational Training",
+      text: "Our Educational Training Software is built to redefine learning in the digital age. It provides an interactive and engaging platform where students, educators, and institutions can connect, learn, and grow together.With powerful features like live virtual classes, video lessons, progress tracking, and automated assessments, the software ensures that every learner receives a complete and personalized learning experience.Educators can easily manage courses, upload resources, track performance, and communicate directly with their students  all in one place.Whether used for schools, colleges, or skill development centers, our Educational Training Software bridges the gap between traditional learning and modern technology, making education more accessible, flexible, and effective for everyone."
+    }
+  ];
+
+  let current = 0;
+
+  function changeSlide() {
+    // Reset active states
+    slides.forEach((s) => s.classList.remove("active"));
+
+    // Next slide index
+    current = (current + 1) % slides.length;
+    slides[current].classList.add("active");
+
+    // Animate text instantly in sync
+    title.classList.add("fade-sync");
+    text.classList.add("fade-sync");
+
+    setTimeout(() => {
+      title.textContent = content[current].title;
+      text.textContent = content[current].text;
+    }, 250); // Slight delay for smoother visual sync
+
+    setTimeout(() => {
+      title.classList.remove("fade-sync");
+      text.classList.remove("fade-sync");
+    }, 1000);
+  }
+
+  setInterval(changeSlide, 5000);
+</script>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+  }
+
+  .slide.active {
+    opacity: 1;
+  }
+
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+  }
+
+  /* Sync text fade */
+  .fade-sync {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.8s ease;
+  }
+
+  .hero-content {
+    max-width: 600px;
+    animation: fadeIn 1s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
+
+
+
+   <section id="about" class="section about-section">
+  <div class="wrap about-grid">
+    <div class="about-content" data-animate="fade-up">
+      <div class="section-head center">
+        <h3>Why Choose Prodigy</h3>
+        <p class="muted bold-intro">
+          Empowering minds to build tomorrow’s world today. <br>
+          From aspiring developers to future innovators, 
+          <span class="highlight">Prodigy Tech Hub</span> is a launchpad for those ready to make impact. <br>
+          We blend <span class="highlight">vision, creativity, and technology</span>  transforming ambition into achievement 
+          and ideas into solutions that shape the modern world. <br><br>
+          <strong>Learn, create, and lead with confidence — the Prodigy way.</strong>
+        </p>
+      </div>
+
+      <div class="about-intro" data-animate="fade-up">
+        <div class="about-dropdown">
+          <button class="dropdown-toggle">
+            <h4>Our Mission</h4>
+            <span class="arrow">▾</span>
+          </button>
+          <div class="dropdown-content">
+            <p>
+              At <strong>Prodigy Tech Hub</strong>, we’re committed to turning passion into skill and ideas into impact.
+              We help learners build practical experience through live mentorship, collaborative projects,
+              and a community that supports their growth.
+            </p>
+          </div>
+        </div>
+
+        <div class="about-dropdown">
+          <button class="dropdown-toggle">
+            <h4>Our Vision</h4>
+            <span class="arrow">▾</span>
+          </button>
+          <div class="dropdown-content">
+            <p>
+              To create a world where anyone, anywhere can become a confident tech professional —
+              ready to build, innovate, and lead the next digital revolution.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta-row" data-animate="fade-up">
+        <a href="#courses" class="btn btn-primary">Explore Our Courses</a>
+        <a href="#instructors" class="btn btn-ghost">Meet Our Mentors</a>
+      </div>
+    </div>
+
+    <div class="about-image" data-animate="fade-left">
+      <img src="/Resources/assets/img/Discussion Photos - Download Free High-Quality Pictures _ Freepik.jpeg"
+        alt="Students collaborating at Prodigy" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section id="features" class="section features-section">
+  <div class="wrap">
+    <div class="section-head center" data-animate="fade-up">
+      <h3>What Makes Prodigy Different</h3>
+      <p class="muted">At Prodigy, learning goes beyond lectures. <br> We turn curiosity into real-world power by merging creativity, technology,<br> and critical thinking. Every lesson pushes you to solve problems,<br> build things that matter, and shape ideas that stand out in today’s fast-moving world.</p>
+    </div>
+
+    <div class="grid features">
+      <div class="feature" data-animate="fade-up">
+        <div class="icon">👩‍🏫</div>
+        <h4>Expert Mentors</h4>
+        <p>Learn directly from experienced professionals who teach what they practice.</p>
+        <a href="#instructors" class="btn btn-outline">Meet Them</a>
+      </div>
+
+      <div class="feature" data-animate="fade-up" data-delay="100">
+        <div class="icon">🧰</div>
+        <h4>Project-Based Learning</h4>
+        <p>Build real-world projects that prove your skills and prepare you for opportunities.</p>
+        <a href="#projects" class="btn btn-outline">View Projects</a>
+      </div>
+
+      <div class="feature" data-animate="fade-up" data-delay="200">
+        <div class="icon">🚀</div>
+        <h4>Career Support</h4>
+        <p>Receive mentorship on interviews, CVs, and connections to hiring partners.</p>
+        <a href="#career" class="btn btn-outline">See How</a>
+      </div>
+
+      <div class="feature" data-animate="fade-up" data-delay="300">
+        <div class="icon">🌐</div>
+        <h4>Vibrant Community</h4>
+        <p>Join an inspiring network of learners and mentors helping each other grow.</p>
+        <a href="#community" class="btn btn-outline">Join Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    <section id="courses" class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h3>Featured programs</h3>
+            <p class="muted">Select a track that fits your goals.</p>
+          </div>
+          <div class="muted">Beginner • Intermediate • Advanced</div>
+        </div>
+
+        <div class="grid courses" style="grid-template-columns:repeat(3,1fr)">
+          <!-- Course 1 -->
+          <article class="course">
+            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600&auto=format&fit=crop&ixlib=rb-4.0.3&s=1" alt="Full-stack web" loading="lazy">
+            <div class="body">
+              <div class="meta">6 months · Beginner → Intermediate</div>
+              <h4 style="margin:.25rem 0">Full-Stack Web Development</h4>
+              <p class="muted">Build modern web apps using HTML, CSS, JavaScript and React.</p>
+              <div class="footer">
+                <a class="btn btn-ghost" href="#">Learn</a>
+                <a class="btn btn-primary" href="#apply">Apply</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Course 2 -->
+          <article class="course">
+            <img src="/Resources/assets/img/dt.jpeg" alt="Data analysis" loading="lazy">
+            <div class="body">
+              <div class="meta">4 months · Beginner</div>
+              <h4 style="margin:.25rem 0">Data Analysis & Visualization</h4>
+              <p class="muted">Python, Pandas and clear visual storytelling with data.</p>
+              <div class="footer">
+                <a class="btn btn-ghost" href="#">Learn</a>
+                <a class="btn btn-primary" href="#apply">Apply</a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Course 3 -->
+          <article class="course">
+            <img src="/Resources/assets/img/ai.jpeg" alt="AI" loading="lazy">
+            <div class="body">
+              <div class="meta">6 months · Intermediate</div>
+              <h4 style="margin:.25rem 0">AI & Machine Learning</h4>
+              <p class="muted">Hands-on ML with real projects and model deployment.</p>
+              <div class="footer">
+                <a class="btn btn-ghost" href="#">Learn</a>
+                <a class="btn btn-primary" href="#apply">Apply</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+<section id="how" class="how-section">
+  <div class="wrap">
+    <div class="section-head" data-animate="fade-up">
+      <h3>How It Works</h3>
+      <p class="muted">A simple, proven path to skill and employment.</p>
+    </div>
+
+    <div class="grid steps">
+      <div class="step" data-animate="fade-up">
+        <div class="num">1</div>
+        <strong>Apply</strong>
+        <p class="muted">Choose a program & enroll</p>
+        <a href="#apply" class="btn-step">Start Now</a>
+      </div>
+
+      <div class="step" data-animate="fade-up">
+        <div class="num">2</div>
+        <strong>Learn</strong>
+        <p class="muted">Live sessions & hands-on projects</p>
+        <a href="#courses" class="btn-step">View Courses</a>
+      </div>
+
+      <div class="step" data-animate="fade-up">
+        <div class="num">3</div>
+        <strong>Build</strong>
+        <p class="muted">Create real portfolio projects</p>
+        <a href="#projects" class="btn-step">Explore</a>
+      </div>
+
+      <div class="step" data-animate="fade-up">
+        <div class="num">4</div>
+        <strong>Certify</strong>
+        <p class="muted">Earn your certificate & feedback</p>
+        <a href="#certification" class="btn-step">Get Certified</a>
+      </div>
+
+      <div class="step" data-animate="fade-up">
+        <div class="num">5</div>
+        <strong>Get Hired</strong>
+        <p class="muted">We connect you to hiring partners</p>
+        <a href="#career" class="btn-step">See Jobs</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <section id="instructors" class="section">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <h3>Meet our instructors</h3>
+            <p class="muted">Practitioners who teach what they do.</p>
+          </div>
+        </div>
+
+        <div class="grid mentors" style="grid-template-columns:repeat(4,1fr)">
+          <article class="mentor">
+            <img src="/Resources/assets/img/1.jpeg" alt="Instructor" loading="lazy">
+            <h4>Emmanuel (Francis) Racham</h4>
+            <div class="muted">Senior Web Engineer</div>
+          </article>
+
+          <article class="mentor">
+            <img src="/Resources/assets/img/11.jpeg" alt="Instructor" loading="lazy">
+            <h4>Emmanuel (Francis) Racham</h4>
+            <div class="muted">Data Scientist</div>
+          </article>
+
+          <article class="mentor">
+            <img src="/Resources/assets/img/22.jpeg" alt="Instructor" loading="lazy">
+            <h4>Sam K</h4>
+            <div class="muted">AI Researcher</div>
+          </article>
+
+          <article class="mentor">
+            <img src="/Resources/assets/img/44.jpeg" alt="Instructor" loading="lazy">
+            <h4>Rita N</h4>
+            <div class="muted">Product Designer</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  <section id="testimonials" class="section testimonials-section">
+  <div class="container">
+    <!-- Section Head -->
+    <div class="section-head center">
+      <h3>Success Stories</h3>
+      <p class="muted">Real experiences from Prodigy graduates who turned learning into impact.</p>
+    </div>
+
+    <!-- Intro Video / Banner -->
+    <div class="testimonial-intro">
+      <video autoplay muted loop playsinline poster="Resources/Images/success-poster.jpg">
+        <source src="Resources/Videos/success-stories.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+      </video>
+      <div class="overlay">
+        <h4>Over 1,200 graduates worldwide</h4>
+        <p>Transforming passion into digital careers every single day.</p>
+      </div>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="testimonial-stats">
+      <div class="stat">
+        <h2 class="counter" data-target="1200">0</h2>
+        <p>Graduates</p>
+      </div>
+      <div class="stat">
+        <h2 class="counter" data-target="92">0</h2>
+        <p>Job Placement Rate (%)</p>
+      </div>
+      <div class="stat">
+        <h2 class="counter" data-target="50">0</h2>
+        <p>Active Mentors</p>
+      </div>
+      <div class="stat">
+        <h2 class="counter" data-target="15">0</h2>
+        <p>Partner Companies</p>
+      </div>
+    </div>
+
+    <!-- Testimonials Carousel -->
+    <div class="testimonial-slider" id="testimonialSlider">
+      <div class="testimonial-slide active">
+        <blockquote>
+          “Prodigy changed my life. The mentorship and hands-on projects helped me land my dream job.”
+        </blockquote>
+        <div class="author">
+          <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=300&auto=format&fit=crop" alt="Amaka">
+          <div>
+            <strong>Amaka</strong>
+            <p class="muted">Frontend Developer</p>
+            <div class="stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-slide">
+        <blockquote>
+          “Before Prodigy, I had zero coding background. Today, I’m a full-time data analyst at a fintech firm.”
+        </blockquote>
+        <div class="author">
+          <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?q=80&w=300&auto=format&fit=crop" alt="Kelechi">
+          <div>
+            <strong>Kelechi</strong>
+            <p class="muted">Data Analyst</p>
+            <div class="stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-slide">
+        <blockquote>
+          “From student to startup founder — Prodigy gave me the foundation to build confidently.”
+        </blockquote>
+        <div class="author">
+          <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=300&auto=format&fit=crop" alt="David">
+          <div>
+            <strong>David</strong>
+            <p class="muted">AI Engineer</p>
+            <div class="stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Dots -->
+    <div class="testimonial-dots" id="testimonialDots"></div>
+  </div>
+</section>
+
+
+
+    <section class="final-cta">
+      <div class="wrap">
+        <h3>Ready to start your tech journey?</h3>
+        <div style="margin-top:1rem;display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap">
+          <a class="btn btn-primary" href="#apply">Apply Now</a>
+          <a class="btn btn-ghost" href="#contact">Contact Admissions</a>
+        </div>
+      </div>
+    </section>
+
+    <footer id="contact" class="site-footer">
+      <div class="wrap footer-grid">
+        <div>
+          <a class="brand" href="#" style="text-decoration:none;color:var(--text)">
+            <span class="logo-mark">P</span>
+            <div style="display:inline-block;vertical-align:middle;margin-left:.6rem"><strong>Prodigy Tech Hub</strong><div class="muted" style="font-size:.85rem">Learn • Build • Launch</div></div>
+          </a>
+          <p class="muted" style="margin-top:.8rem">Hands-on tech education and career support for ambitious learners.</p>
+        </div>
+
+        <div>
+          <h4>Courses</h4>
+          <ul style="list-style:none;padding:0;margin:0">
+            <li><a href="#courses">Web Dev</a></li>
+            <li><a href="#courses">Data</a></li>
+            <li><a href="#courses">AI</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Resources</h4>
+          <ul style="list-style:none;padding:0;margin:0">
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#testimonials">Alumni</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4>Contact</h4>
+          <p class="muted">📞 +234 800 000 0000</p>
+          <p class="muted">✉️ hello@prodigyhub.ng</p>
+        </div>
+      </div>
+
+      <div class="wrap" style="text-align:center;padding-top:1rem;border-top:1px solid rgba(15,23,36,0.03);margin-top:1rem">
+        <small class="muted">© 2025 Prodigy Tech Hub • Designed by The One and Only Great Oracle</small>
+      </div>
+    </footer>
+  <script src="Resources/js/main.js"></script>
+  </main>
+</body>
+</html>

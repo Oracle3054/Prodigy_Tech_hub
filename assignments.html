@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Assignments | Prodigy Tech Hub</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ===== BASE ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #ffffff;
+      color: #1f2937;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: #fff;
+      border-bottom: 1px solid #e5e7eb;
+      padding: 1rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+      color: #007bff;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      margin-left: 2rem;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #007bff;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      text-align: center;
+      padding: 4rem 2rem 2rem;
+      background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+    }
+
+    .hero h2 {
+      font-size: 2.3rem;
+      color: #1e293b;
+      margin-bottom: 0.6rem;
+    }
+
+    .hero p {
+      color: #4b5563;
+      font-size: 1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* ===== ASSIGNMENT GRID ===== */
+    .assignments {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 3rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #e5e7eb;
+      border-radius: 15px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+      transition: all 0.4s ease;
+      overflow: hidden;
+      position: relative;
+      transform: translateY(0);
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 24px rgba(0, 123, 255, 0.15);
+    }
+
+    .card-content {
+      padding: 1.8rem;
+    }
+
+    .card h3 {
+      font-size: 1.2rem;
+      color: #1e293b;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      color: #6b7280;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 1rem;
+    }
+
+    .due {
+      color: #ef4444;
+      font-weight: 600;
+    }
+
+    .status {
+      padding: 0.3rem 0.8rem;
+      border-radius: 6px;
+      font-weight: 500;
+      font-size: 0.85rem;
+    }
+
+    .status.pending {
+      background: #fff4e5;
+      color: #b45309;
+    }
+
+    .status.submitted {
+      background: #e0f2fe;
+      color: #0369a1;
+    }
+
+    .status.graded {
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.6rem 1.3rem;
+      background: #007bff;
+      color: #fff;
+      border-radius: 8px;
+      font-weight: 500;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .btn:hover {
+      background: #005fcc;
+      transform: translateY(-2px);
+    }
+
+    /* ===== REVEAL ANIMATION ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease-out;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #6b7280;
+      font-size: 0.9rem;
+      border-top: 1px solid #e5e7eb;
+      background: #fafafa;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Prodigy Tech Hub</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="courses.html">Courses</a>
+      <a href="assignments.html" class="active">Assignments</a>
+      <a href="profile.html">Profile</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Assignments & Projects</h2>
+    <p>Track, submit, and review your latest assignments with real-time progress updates.</p>
+  </section>
+
+  <section class="assignments">
+    <div class="card reveal">
+      <div class="card-content">
+        <h3>HTML & CSS Landing Page</h3>
+        <p>Create a responsive landing page layout for a startup using only HTML and CSS. Include a hero section, features, and a footer.</p>
+        <div class="meta">
+          <span class="due">Due: Nov 5, 2025</span>
+          <span class="status pending">Pending</span>
+        </div>
+        <a href="#" class="btn">Submit Work</a>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-content">
+        <h3>Big Data Visualization</h3>
+        <p>Analyze a dataset using Python and create an interactive visualization dashboard showcasing trends and insights.</p>
+        <div class="meta">
+          <span class="due">Due: Nov 10, 2025</span>
+          <span class="status submitted">Submitted</span>
+        </div>
+        <a href="#" class="btn">View Submission</a>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-content">
+        <h3>Educational App UI</h3>
+        <p>Design and prototype a student learning app with user profiles, assignments, and progress tracking pages.</p>
+        <div class="meta">
+          <span class="due">Due: Nov 18, 2025</span>
+          <span class="status graded">Graded</span>
+        </div>
+        <a href="#" class="btn">View Feedback</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Prodigy Tech Hub. All rights reserved.
+  </footer>
+
+  <script>
+    // Scroll Reveal Animation
+    const reveals = document.querySelectorAll(".reveal");
+    window.addEventListener("scroll", () => {
+      reveals.forEach((el) => {
+        const windowHeight = window.innerHeight;
+        const elementTop = el.getBoundingClientRect().top;
+        if (elementTop < windowHeight - 100) {
+          el.classList.add("active");
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Dashboard | Prodigy Tech Hub Nigeria</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #2563eb;
+      --secondary: #1e40af;
+      --success: #16a34a;
+      --bg: #f1f5f9;
+      --white: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --radius: 16px;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{
+      font-family:'Poppins',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+    }
+
+    header{
+      background:var(--white);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:1.2rem 3rem;
+      box-shadow:0 2px 8px rgba(0,0,0,0.05);
+      position:sticky;top:0;z-index:20;
+    }
+    header h1{color:var(--primary);font-weight:700;font-size:1.5rem;}
+    nav a{
+      text-decoration:none;
+      color:var(--muted);
+      font-weight:500;
+      margin-left:1.5rem;
+      transition:.3s;
+    }
+    nav a:hover,nav a.active{color:var(--primary);}
+
+    main{
+      max-width:1200px;
+      margin:2rem auto;
+      padding:0 1.5rem;
+    }
+
+    .greeting{
+      background:linear-gradient(135deg,#e0f2fe 0%,#ffffff 100%);
+      padding:2rem;
+      border-radius:var(--radius);
+      box-shadow:0 4px 15px rgba(0,0,0,0.05);
+      text-align:center;
+    }
+    .greeting h2{
+      font-size:1.8rem;
+      color:var(--text);
+    }
+    .greeting p{color:var(--muted);margin-top:.5rem;}
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:1.5rem;
+      margin-top:2rem;
+    }
+    .card{
+      background:var(--white);
+      border-radius:var(--radius);
+      padding:1.5rem;
+      box-shadow:0 4px 15px rgba(0,0,0,0.05);
+      transition:.3s;
+    }
+    .card:hover{transform:translateY(-4px);}
+    .card h4{color:var(--primary);margin-bottom:.6rem;}
+    .card p{color:var(--muted);font-size:.95rem;}
+
+    .progress-bar{
+      background:#e2e8f0;
+      border-radius:10px;
+      height:10px;
+      overflow:hidden;
+      margin-top:.5rem;
+    }
+    .progress{
+      height:100%;
+      border-radius:10px;
+      background:var(--primary);
+      width:0%;
+      transition:width 1s ease;
+    }
+
+    .table-section{
+      margin-top:2.5rem;
+      background:var(--white);
+      border-radius:var(--radius);
+      box-shadow:0 6px 20px rgba(0,0,0,0.05);
+      padding:2rem;
+    }
+    .table-section h3{
+      color:var(--primary);
+      margin-bottom:1rem;
+      border-left:5px solid var(--primary);
+      padding-left:.7rem;
+    }
+
+    table{width:100%;border-collapse:collapse;font-size:0.95rem;}
+    th,td{padding:1rem;text-align:left;border-bottom:1px solid #f1f5f9;}
+    th{background:#f9fafb;color:#1e3a8a;font-weight:600;}
+    td{color:var(--muted);}
+    tr:hover td{background:#f8fafc;}
+    .status{
+      padding:0.35rem 0.8rem;
+      border-radius:6px;
+      font-weight:500;
+      font-size:0.85rem;
+    }
+    .completed{background:#dcfce7;color:#166534;}
+    .ongoing{background:#dbeafe;color:#1e40af;}
+    .pending{background:#fff4e5;color:#b45309;}
+
+    footer{
+      text-align:center;
+      padding:2rem;
+      color:var(--muted);
+      font-size:0.9rem;
+      background:#fafafa;
+      border-top:1px solid #e5e7eb;
+      margin-top:3rem;
+    }
+
+    @media(max-width:600px){
+      header{flex-direction:column;text-align:center;}
+      nav{margin-top:.8rem;}
+      nav a{margin:0 1rem;}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Prodigy Tech Hub</h1>
+    <nav>
+      <a href="dashboard.html" class="active">Dashboard</a>
+      <a href="courses.html">Courses</a>
+      <a href="assignments.html">Assignments</a>
+      <a href="payments.html">Payments</a>
+      <a href="profile.html">Profile</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="greeting">
+      <h2>Welcome Back, <span id="studentName">Oracle</span> 👋</h2>
+      <p>Here’s a quick summary of your academic progress and activities.</p>
+    </div>
+
+    <section class="stats">
+      <div class="card">
+        <h4>Course Progress</h4>
+        <p>Full Stack Development Bootcamp</p>
+        <div class="progress-bar">
+          <div class="progress" data-progress="70"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h4>Assignments</h4>
+        <p>8 Completed / 10 Total</p>
+        <div class="progress-bar">
+          <div class="progress" data-progress="80"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h4>Payments</h4>
+        <p>₦150,000 Paid / ₦200,000 Total</p>
+        <div class="progress-bar">
+          <div class="progress" data-progress="75"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="table-section">
+      <h3>Recent Activities</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Activity</th>
+            <th>Details</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Oct 27, 2025</td>
+            <td>Submitted Assignment</td>
+            <td>HTML & CSS Project</td>
+            <td><span class="status completed">Completed</span></td>
+          </tr>
+          <tr>
+            <td>Oct 28, 2025</td>
+            <td>Payment</td>
+            <td>₦50,000 Tuition Fee</td>
+            <td><span class="status pending">Pending</span></td>
+          </tr>
+          <tr>
+            <td>Oct 29, 2025</td>
+            <td>Live Class</td>
+            <td>JavaScript Session (Online)</td>
+            <td><span class="status ongoing">Ongoing</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 Prodigy Tech Hub Nigeria. All Rights Reserved.
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded",()=>{
+      document.querySelectorAll(".progress").forEach(bar=>{
+        const val=bar.getAttribute("data-progress");
+        setTimeout(()=>{bar.style.width=val+"%";},300);
+      });
+    });
+  </script>
+</body>
+</html>

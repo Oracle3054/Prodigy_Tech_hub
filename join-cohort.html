@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Join a Cohort — Prodigy Tech Hub</title>
+  <style>
+    :root {
+      --primary:#2563eb;
+      --accent:#60a5fa;
+      --dark:#0f172a;
+      --muted:#64748b;
+      --light:#f8fafc;
+      --radius:14px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--light);
+      color: var(--dark);
+      overflow-x:hidden;
+    }
+
+    header {
+      background:white;
+      box-shadow:0 2px 20px rgba(0,0,0,0.05);
+      padding:1rem 5%;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      position:sticky;
+      top:0; z-index:100;
+    }
+    .logo {
+      font-weight:800;
+      font-size:1.3rem;
+      color:var(--primary);
+      text-decoration:none;
+    }
+    nav a {
+      margin-left:1.5rem;
+      text-decoration:none;
+      color:var(--dark);
+      font-weight:600;
+      transition:color .3s;
+    }
+    nav a:hover, nav a.active {color:var(--primary);}
+
+    /* === HERO === */
+    .hero {
+      height:80vh;
+      background:linear-gradient(120deg, rgba(37,99,235,0.8), rgba(96,165,250,0.8)), url('https://images.unsplash.com/photo-1525186402429-b4ff38bedbec?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      color:white;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      animation:fadeIn 1s ease;
+    }
+    @keyframes fadeIn {from{opacity:0;}to{opacity:1;}}
+    .hero h1 {
+      font-size:2.8rem;
+      font-weight:800;
+      margin-bottom:0.6rem;
+    }
+    .hero p {
+      font-size:1.1rem;
+      max-width:600px;
+      opacity:0.9;
+    }
+    .hero .btn {
+      margin-top:1.5rem;
+      background:white;
+      color:var(--primary);
+      border:none;
+      padding:0.8rem 1.6rem;
+      border-radius:var(--radius);
+      font-weight:700;
+      cursor:pointer;
+      transition:all .3s;
+    }
+    .hero .btn:hover {
+      transform:translateY(-4px);
+      background:var(--accent);
+      color:white;
+    }
+
+    /* === UPCOMING COHORTS === */
+    section {
+      padding:4rem 5%;
+    }
+    h2.section-title {
+      text-align:center;
+      font-size:2rem;
+      font-weight:800;
+      margin-bottom:2rem;
+      color:var(--dark);
+    }
+    .cohort-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
+      gap:1.5rem;
+    }
+    .cohort-card {
+      background:white;
+      border-radius:var(--radius);
+      box-shadow:0 8px 20px rgba(0,0,0,0.08);
+      padding:1.5rem;
+      text-align:center;
+      transition:all .3s;
+      cursor:pointer;
+    }
+    .cohort-card:hover {
+      transform:translateY(-5px);
+      box-shadow:0 15px 30px rgba(0,0,0,0.12);
+    }
+    .cohort-card h3 {
+      color:var(--primary);
+      margin-bottom:0.3rem;
+    }
+    .countdown {
+      text-align:center;
+      font-size:1.2rem;
+      font-weight:700;
+      color:var(--primary);
+      margin-top:1rem;
+    }
+
+    /* === FORM === */
+    .form-container {
+      max-width:600px;
+      margin:0 auto;
+      background:white;
+      padding:2rem;
+      border-radius:var(--radius);
+      box-shadow:0 10px 25px rgba(0,0,0,0.08);
+      animation:fadeInUp 1s ease;
+    }
+    @keyframes fadeInUp {from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:none;}}
+    form {display:flex;flex-direction:column;gap:1rem;}
+    label{font-weight:600;font-size:.9rem;color:var(--muted);}
+    input, select, textarea {
+      padding:.8rem 1rem;
+      border-radius:8px;
+      border:1px solid rgba(0,0,0,0.1);
+      font-size:1rem;
+      outline:none;
+      transition:border .2s, box-shadow .2s;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color:var(--accent);
+      box-shadow:0 0 0 3px rgba(96,165,250,0.25);
+    }
+    textarea{resize:none;height:100px;}
+    button.submit-btn {
+      background:var(--primary);
+      color:white;
+      border:none;
+      padding:1rem;
+      border-radius:8px;
+      font-weight:700;
+      font-size:1rem;
+      cursor:pointer;
+      transition:background .3s;
+    }
+    button.submit-btn:hover{background:#1e40af;}
+
+    /* === WHY JOIN === */
+    .why-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:1.5rem;
+      text-align:center;
+      margin-top:2rem;
+    }
+    .why-card {
+      background:white;
+      padding:1.5rem;
+      border-radius:var(--radius);
+      box-shadow:0 6px 20px rgba(0,0,0,0.06);
+      transition:transform .3s;
+    }
+    .why-card:hover {transform:translateY(-5px);}
+    .why-card h4 {color:var(--primary); margin-top:1rem;}
+
+    /* === FOOTER === */
+    footer {
+      background:var(--dark);
+      color:white;
+      text-align:center;
+      padding:2rem 1rem;
+      margin-top:4rem;
+    }
+    footer a{color:var(--accent);text-decoration:none;}
+    footer a:hover{text-decoration:underline;}
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="logo">Prodigy Tech Hub</a>
+    <nav>
+      <a href="about.html">About</a>
+      <a href="training.html">Training</a>
+      <a href="courses.html">Courses</a>
+      <a href="admission.html">Admission</a>
+      <a href="portal.html">Portal</a>
+      <a href="blog.html">Blog</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Join Our Next Tech Cohort</h1>
+    <p>Step into a community of innovators, guided by mentors who’ve done it before.</p>
+    <button class="btn" onclick="document.getElementById('apply').scrollIntoView({behavior:'smooth'})">Apply Now</button>
+  </section>
+
+  <!-- UPCOMING COHORTS -->
+  <section>
+    <h2 class="section-title">Upcoming Sessions</h2>
+    <div class="cohort-grid">
+      <div class="cohort-card">
+        <h3>Frontend Development</h3>
+        <p>Starts Nov 10, 2025</p>
+      </div>
+      <div class="cohort-card">
+        <h3>Data Science</h3>
+        <p>Starts Nov 15, 2025</p>
+      </div>
+      <div class="cohort-card">
+        <h3>UI/UX Design</h3>
+        <p>Starts Dec 2, 2025</p>
+      </div>
+    </div>
+    <p class="countdown">Next Cohort Starts In: <span id="timer"></span></p>
+  </section>
+
+  <!-- FORM -->
+  <section id="apply">
+    <h2 class="section-title">Apply for the Next Cohort</h2>
+    <div class="form-container">
+      <form id="cohortForm">
+        <div>
+          <label>Full Name</label>
+          <input type="text" id="name" required />
+        </div>
+        <div>
+          <label>Email</label>
+          <input type="email" id="email" required />
+        </div>
+        <div>
+          <label>Phone</label>
+          <input type="tel" id="phone" required />
+        </div>
+        <div>
+          <label>Desired Track</label>
+          <select id="track" required>
+            <option value="">Select Track</option>
+            <option>Frontend Development</option>
+            <option>Data Science</option>
+            <option>UI/UX Design</option>
+            <option>Cybersecurity</option>
+            <option>Cloud Computing</option>
+          </select>
+        </div>
+        <div>
+          <label>Learning Mode</label>
+          <select id="mode" required>
+            <option value="">Select Mode</option>
+            <option>Onsite</option>
+            <option>Online</option>
+            <option>Hybrid</option>
+          </select>
+        </div>
+        <div>
+          <label>Your Goals / Message</label>
+          <textarea id="message" placeholder="Tell us what you aim to achieve..."></textarea>
+        </div>
+        <button class="submit-btn" type="submit">Submit Application</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- WHY JOIN -->
+  <section>
+    <h2 class="section-title">Why Join Prodigy’s Cohort?</h2>
+    <div class="why-grid">
+      <div class="why-card">
+        <img src="Resources/assets/impo/et.jpeg" width="50">
+        <h4>Real-world Projects</h4>
+        <p>Gain practical experience working on real client-based projects.</p>
+      </div>
+      <div class="why-card">
+        <img src="Resources/assets/11/🚀 Master AI with the Best Machine Learning Classes in Thane!.jpeg" width="50">
+        <h4>1-on-1 Mentorship</h4>
+        <p>Learn directly from experienced industry experts.</p>
+      </div>
+      <div class="why-card">
+        <img src="Resources/assets/11/HUBiquitous Talent Program_ Empowering the Next Generation of Tech Leaders in Ghana.jpeg" width="50">
+        <h4>Career Support</h4>
+        <p>Access job guidance, internships, and alumni network support.</p>
+      </div>
+      <div class="why-card">
+        <img src="Resources/assets/11/🚀 Level Up with a Comprehensive Diploma in Data Science.jpeg" width="50">
+        <h4>Networking</h4>
+        <p>Join a growing community of tech professionals and founders.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p><a href="index.html">← Back to Home</a></p>
+    <p>© 2025 Prodigy Tech Hub. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Countdown Timer
+    const nextCohortDate = new Date("Nov 10, 2025 09:00:00").getTime();
+    const timer = document.getElementById("timer");
+
+    setInterval(() => {
+      const now = new Date().getTime();
+      const distance = nextCohortDate - now;
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      timer.textContent = `${days}d ${hours}h ${minutes}m`;
+    }, 1000);
+
+    // Form Notification
+    const form = document.getElementById("cohortForm");
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      console.log(`🧭 ${name} just applied for the next Prodigy Cohort!`);
+      alert("✅ Application submitted successfully! Welcome to Prodigy Tech Hub Cohort.");
+      form.reset();
+    });
+  </script>
+</body>
+</html>
